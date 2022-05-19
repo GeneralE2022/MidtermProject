@@ -9,5 +9,7 @@
 <body>
 <h1>Welcome to NeighborGood~</h1>
 
+${DEBUG}
+
 </body>
 </html>
