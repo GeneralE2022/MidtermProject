@@ -1,0 +1,16 @@
+h1 {
+  font-family: Geneva;
+  font-size: 24px;
+}
+
+h1.page-header{
+  text-align: center;
+  font-family: Geneva, sans-serif;
+  font-size: 24px;
+}
+
+body {
+  font-family: Geneva, sans-serif;
+  font-size: 16px;
+
+}
