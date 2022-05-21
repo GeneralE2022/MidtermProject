@@ -3,55 +3,48 @@ package com.skilldistillery.neighborgood.data;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import javax.persistence.PersistenceContext;
+import javax.transaction.Transactional;
+
+import org.springframework.stereotype.Service;
 
 import com.skilldistillery.neighborgood.entities.User;
 
+@Transactional
+@Service
 public class UserDAOImpl implements UserDAO {
+	
+	@PersistenceContext
+	private EntityManager em;
+
 
 	@Override
 	public User createNewUser(User newUser) {
-		EntityManagerFactory emf = Persistence.createEntityManagerFactory("JPANeighborGood");
-		EntityManager em = emf.createEntityManager();
-		em.getTransaction().begin();
 		em.persist(newUser);
 		em.flush();
-		em.getTransaction().commit();
-		em.clear();
-		em.close();
-		emf.close();
 		return newUser;
 	}
 
 	@Override
 	public User update(int id, User user) {
-		EntityManagerFactory emf = Persistence.createEntityManagerFactory("JPANeighborGood");
-		EntityManager em = emf.createEntityManager();
 
 		User dbUser = em.find(User.class, id);
 
 		if (dbUser != null) {
-			em.getTransaction().begin();
 			dbUser.setFirstName(user.getFirstName());
 			dbUser.setLastName(user.getLastName());
 			dbUser.setUsername(user.getUsername());
 			dbUser.setPassword(user.getPassword());
-			em.getTransaction().commit();
 		}
-		em.clear();
-		em.close();
-		emf.close();
 		return dbUser;
 	}
 
 	@Override
 	public boolean destroy(int id) {
-		EntityManagerFactory emf = Persistence.createEntityManagerFactory("JPANeighborGood");
-		EntityManager em = emf.createEntityManager();
 
 		boolean destroyed = false;
 
 		User userToRemove = em.find(User.class, id);
-		em.getTransaction().begin();
 
 		em.remove(userToRemove);
 
@@ -60,11 +53,6 @@ public class UserDAOImpl implements UserDAO {
 			System.out.println("Remove success");
 		}
 
-		em.getTransaction().commit();
-
-		em.clear();
-		em.close();
-		emf.close();
 		return destroyed;
 
 	}
