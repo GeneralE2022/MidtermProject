@@ -2,6 +2,8 @@ package com.skilldistillery.neighborgood.entities;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.time.Month;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -12,11 +14,11 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-class ContactTest {
-
+class SubcategoryTest {
+	
 	private static EntityManagerFactory emf;
 	private static EntityManager em;
-	private static Contact contact;
+	private static Subcategory sub;
 
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
@@ -31,20 +33,21 @@ class ContactTest {
 	@BeforeEach
 	void setUp() throws Exception {
 		em = emf.createEntityManager();
-		contact = em.find(Contact.class, 1);
+		sub = em.find(Subcategory.class, 21);
 	}
 
 	@AfterEach
 	void tearDown() throws Exception {
 		em.close();
-		contact = null;
+		sub = null;
 	}
 
 	@Test
 	void test_field_mappings() {
-		assertNotNull(contact);
-		assertEquals("admin@neighborgood.com", contact.getEmail());
-		assertEquals("00 Nowhere Ln", contact.getStreet());
+		assertNotNull(sub);
+		assertEquals("Weeding", sub.getTitle());
+		assertEquals(20, sub.getCategoryId());
+		
 	}
 
 }

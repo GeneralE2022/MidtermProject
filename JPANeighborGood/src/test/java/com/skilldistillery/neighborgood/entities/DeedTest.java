@@ -12,11 +12,11 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-class ContactTest {
+class DeedTest {
 
 	private static EntityManagerFactory emf;
 	private static EntityManager em;
-	private static Contact contact;
+	private static Deed deed;
 
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
@@ -31,20 +31,20 @@ class ContactTest {
 	@BeforeEach
 	void setUp() throws Exception {
 		em = emf.createEntityManager();
-		contact = em.find(Contact.class, 1);
+		deed = em.find(Deed.class, 1);
 	}
 
 	@AfterEach
 	void tearDown() throws Exception {
 		em.close();
-		contact = null;
+		deed = null;
 	}
 
 	@Test
 	void test_field_mappings() {
-		assertNotNull(contact);
-		assertEquals("admin@neighborgood.com", contact.getEmail());
-		assertEquals("00 Nowhere Ln", contact.getStreet());
+		assertNotNull(deed);
+		assertEquals("Happy weeder", deed.getTitle());
+		assertEquals(2, deed.getProviderId());
+		assertEquals(21, deed.getSubcategoryId());
 	}
-
 }

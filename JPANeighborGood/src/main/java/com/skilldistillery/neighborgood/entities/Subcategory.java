@@ -5,6 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Subcategory {
@@ -17,6 +18,9 @@ public class Subcategory {
 	
 	@Column(name="category_id")
 	private int categoryId;
+	
+	@ManyToOne
+	private Category category;
 
 	public Subcategory() {
 		super();
@@ -44,6 +48,14 @@ public class Subcategory {
 
 	public void setCategoryId(int categoryId) {
 		this.categoryId = categoryId;
+	}
+	
+	public Category getCategory() {
+		return category;
+	}
+
+	public void setCategory(Category category) {
+		this.category = category;
 	}
 
 	@Override

@@ -41,7 +41,7 @@ class CategoryTest {
 	}
 
 	@Test
-	void test() {
+	void test_field_mappings() {
 		assertNotNull(category);
 		assertEquals("Yardwork", category.getTitle());
 	}
