@@ -10,18 +10,19 @@ import javax.persistence.ManyToOne;
 
 @Entity
 public class Deed {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	
+
 	private String title;
-	
+
 	private String description;
-	
-	@Column(name = "provider_id")
-	private int providerId;
-	
+
+	@ManyToOne
+	@JoinColumn(name = "provider_id")
+	private User provider;
+
 	@ManyToOne
 	@JoinColumn(name = "subcategory_id")
 	private Subcategory subcategory;
@@ -54,15 +55,13 @@ public class Deed {
 		this.description = description;
 	}
 
-	public int getProviderId() {
-		return providerId;
+	public User getProvider() {
+		return provider;
 	}
 
-	public void setProviderId(int providerId) {
-		this.providerId = providerId;
+	public void setProvider(User provider) {
+		this.provider = provider;
 	}
-
-
 
 	public Subcategory getSubcategory() {
 		return subcategory;
@@ -74,10 +73,8 @@ public class Deed {
 
 	@Override
 	public String toString() {
-		return "Deed [id=" + id + ", title=" + title + ", description=" + description + ", providerId=" + providerId
+		return "Deed [id=" + id + ", title=" + title + ", description=" + description + ", provider=" + provider
 				+ ", subcategory=" + subcategory + "]";
 	}
-	
-	
 
 }

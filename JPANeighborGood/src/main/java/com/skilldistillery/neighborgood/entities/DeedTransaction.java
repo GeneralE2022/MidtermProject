@@ -12,21 +12,22 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="deed_transaction")
+@Table(name = "deed_transaction")
 public class DeedTransaction {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	
+
 	@ManyToOne
-	@JoinColumn(name="deed_id")
+	@JoinColumn(name = "deed_id")
 	private Deed deed;
-	
-	@Column(name="recipient_id")
-	private int recipientId;
-	
-	@Column(name="provided_date")
+
+	@ManyToOne
+	@JoinColumn(name = "recipient_id")
+	private User recipient;
+
+	@Column(name = "provided_date")
 	private LocalDate providedDate;
 
 	public DeedTransaction() {
@@ -49,12 +50,20 @@ public class DeedTransaction {
 		this.deed = deed;
 	}
 
-	public int getRecipientId() {
-		return recipientId;
+	public Deed getDeed() {
+		return deed;
 	}
 
-	public void setRecipientId(int recipientId) {
-		this.recipientId = recipientId;
+	public void setDeed(Deed deed) {
+		this.deed = deed;
+	}
+
+	public User getRecipient() {
+		return recipient;
+	}
+
+	public void setRecipient(User recipient) {
+		this.recipient = recipient;
 	}
 
 	public LocalDate getProvidedDate() {
@@ -67,10 +76,8 @@ public class DeedTransaction {
 
 	@Override
 	public String toString() {
-		return "DeedTransaction [id=" + id + ", deed=" + deed + ", recipientId=" + recipientId + ", providedDate="
+		return "DeedTransaction [id=" + id + ", deed=" + deed + ", recipient=" + recipient + ", providedDate="
 				+ providedDate + "]";
 	}
-	
-	
 
 }

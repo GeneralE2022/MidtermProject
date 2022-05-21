@@ -55,6 +55,9 @@ class DeedTest {
 	@Test
 	void test_provider_mappings() {
 		assertNotNull(deed);
-		assertEquals(2, deed.getProviderId());
+		assertEquals(2, deed.getProvider().getId());
 	}
-}
+	
+
+	}
+

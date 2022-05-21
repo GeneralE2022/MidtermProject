@@ -57,5 +57,11 @@ class DeedTransactionTest {
 		assertNotNull(dt);
 		assertEquals(1, dt.getDeedId().getId());
 	}
+	
+	@Test
+	void test_user_mappings() {
+		assertNotNull(dt);
+		assertEquals("awettstein", dt.getRecipient().getPassword());
+	}
 
 }

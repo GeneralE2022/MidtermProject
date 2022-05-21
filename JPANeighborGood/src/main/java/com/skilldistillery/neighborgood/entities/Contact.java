@@ -5,6 +5,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 
 @Entity
 public class Contact {
@@ -29,8 +31,9 @@ public class Contact {
 	@Column(name = "zip_code")
 	private String zipCode;
 
-	@Column(name = "user_id")
-	private int userId;
+	@OneToOne
+	@JoinColumn(name = "user_id")
+	private User user;
 
 	public Contact() {
 		super();
@@ -100,18 +103,18 @@ public class Contact {
 		this.zipCode = zipCode;
 	}
 
-	public int getUserId() {
-		return userId;
+	public User getUser() {
+		return user;
 	}
 
-	public void setUserId(int userId) {
-		this.userId = userId;
+	public void setUser(User user) {
+		this.user = user;
 	}
 
 	@Override
 	public String toString() {
 		return "Contact [id=" + id + ", phone=" + phone + ", email=" + email + ", phone2=" + phone2 + ", street="
-				+ street + ", city=" + city + ", state=" + state + ", zipCode=" + zipCode + ", userId=" + userId + "]";
+				+ street + ", city=" + city + ", state=" + state + ", zipCode=" + zipCode + ", user=" + user + "]";
 	}
 
 }
