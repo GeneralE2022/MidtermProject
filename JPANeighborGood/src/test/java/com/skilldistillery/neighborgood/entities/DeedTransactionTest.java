@@ -2,6 +2,7 @@ package com.skilldistillery.neighborgood.entities;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.time.LocalDate;
 import java.time.Month;
@@ -47,10 +48,14 @@ class DeedTransactionTest {
 	@Test
 	void test_field_mappings() {
 		assertNotNull(dt);
-		assertEquals(3, dt.getRecipientId());
 		assertEquals(2022, dt.getProvidedDate().getYear());
 		assertEquals(Month.MAY, dt.getProvidedDate().getMonth());
-		
+	}
+	
+	@Test
+	void test_deed_mappings() {
+		assertNotNull(dt);
+		assertEquals(1, dt.getDeedId().getId());
 	}
 
 }

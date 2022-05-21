@@ -84,7 +84,4 @@ public class Category {
 		Category other = (Category) obj;
 		return id == other.id && Objects.equals(subcategories, other.subcategories);
 	}
-	
-	
-
 }

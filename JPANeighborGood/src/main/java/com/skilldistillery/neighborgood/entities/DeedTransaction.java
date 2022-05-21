@@ -7,6 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -17,8 +19,9 @@ public class DeedTransaction {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
-	@Column(name="deed_id")
-	private int deedId;
+	@ManyToOne
+	@JoinColumn(name="deed_id")
+	private Deed deed;
 	
 	@Column(name="recipient_id")
 	private int recipientId;
@@ -38,12 +41,12 @@ public class DeedTransaction {
 		this.id = id;
 	}
 
-	public int getDeedId() {
-		return deedId;
+	public Deed getDeedId() {
+		return deed;
 	}
 
-	public void setDeedId(int deedId) {
-		this.deedId = deedId;
+	public void setDeedId(Deed deed) {
+		this.deed = deed;
 	}
 
 	public int getRecipientId() {
@@ -64,7 +67,7 @@ public class DeedTransaction {
 
 	@Override
 	public String toString() {
-		return "DeedTransaction [id=" + id + ", deedId=" + deedId + ", recipientId=" + recipientId + ", providedDate="
+		return "DeedTransaction [id=" + id + ", deed=" + deed + ", recipientId=" + recipientId + ", providedDate="
 				+ providedDate + "]";
 	}
 	

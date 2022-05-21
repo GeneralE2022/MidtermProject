@@ -44,7 +44,17 @@ class DeedTest {
 	void test_field_mappings() {
 		assertNotNull(deed);
 		assertEquals("Happy weeder", deed.getTitle());
+	}
+	
+	@Test
+	void test_subcategory_mappings() {
+		assertNotNull(deed);
+		assertEquals(21, deed.getSubcategory().getId());
+	}
+	
+	@Test
+	void test_provider_mappings() {
+		assertNotNull(deed);
 		assertEquals(2, deed.getProviderId());
-		assertEquals(21, deed.getSubcategoryId());
 	}
 }

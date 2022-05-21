@@ -46,8 +46,11 @@ class SubcategoryTest {
 	void test_field_mappings() {
 		assertNotNull(sub);
 		assertEquals("Weeding", sub.getTitle());
-		assertEquals(20, sub.getCategoryId());
-		
 	}
-
+	
+	@Test
+	void test_category_mappings() {
+		assertNotNull(sub);
+		assertEquals(20, sub.getCategory().getId());
+	}
 }

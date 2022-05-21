@@ -1,10 +1,12 @@
 package com.skilldistillery.neighborgood.entities;
 
-import javax.persistence.Column;
+import java.util.Objects;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 @Entity
@@ -16,12 +18,10 @@ public class Subcategory {
 	
 	private String title;
 	
-	@Column(name="category_id")
-	private int categoryId;
-	
 	@ManyToOne
+	@JoinColumn(name="category_id")
 	private Category category;
-
+	
 	public Subcategory() {
 		super();
 	}
@@ -42,14 +42,6 @@ public class Subcategory {
 		this.title = title;
 	}
 
-	public int getCategoryId() {
-		return categoryId;
-	}
-
-	public void setCategoryId(int categoryId) {
-		this.categoryId = categoryId;
-	}
-	
 	public Category getCategory() {
 		return category;
 	}
@@ -60,7 +52,24 @@ public class Subcategory {
 
 	@Override
 	public String toString() {
-		return "Subcategory [id=" + id + ", title=" + title + ", categoryId=" + categoryId + "]";
+		return "Subcategory [id=" + id + ", title=" + title + ", category=" + category + "]";
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(id);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Subcategory other = (Subcategory) obj;
+		return id == other.id;
 	}
 	
 	

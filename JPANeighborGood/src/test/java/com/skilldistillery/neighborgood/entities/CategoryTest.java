@@ -1,6 +1,8 @@
 package com.skilldistillery.neighborgood.entities;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -44,6 +46,12 @@ class CategoryTest {
 	void test_field_mappings() {
 		assertNotNull(category);
 		assertEquals("Yardwork", category.getTitle());
+	}
+
+	@Test
+	void test_subcategory_mappings() {
+		assertNotNull(category);
+		assertTrue(category.getSubcategories().size() > 0);
 	}
 
 }

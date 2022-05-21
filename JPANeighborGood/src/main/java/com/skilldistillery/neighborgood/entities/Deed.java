@@ -5,6 +5,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Deed {
@@ -20,8 +22,9 @@ public class Deed {
 	@Column(name = "provider_id")
 	private int providerId;
 	
-	@Column(name = "subcategory_id")
-	private int subcategoryId;
+	@ManyToOne
+	@JoinColumn(name = "subcategory_id")
+	private Subcategory subcategory;
 
 	public Deed() {
 		super();
@@ -59,18 +62,20 @@ public class Deed {
 		this.providerId = providerId;
 	}
 
-	public int getSubcategoryId() {
-		return subcategoryId;
+
+
+	public Subcategory getSubcategory() {
+		return subcategory;
 	}
 
-	public void setSubcategoryId(int subcategoryId) {
-		this.subcategoryId = subcategoryId;
+	public void setSubcategory(Subcategory subcategory) {
+		this.subcategory = subcategory;
 	}
 
 	@Override
 	public String toString() {
 		return "Deed [id=" + id + ", title=" + title + ", description=" + description + ", providerId=" + providerId
-				+ ", subcategoryId=" + subcategoryId + "]";
+				+ ", subcategory=" + subcategory + "]";
 	}
 	
 	
