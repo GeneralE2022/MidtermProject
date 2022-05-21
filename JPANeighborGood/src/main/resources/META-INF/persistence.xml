@@ -6,7 +6,19 @@
 	<provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
 		
 		<!-- begin entities -->
+		
+		<class>com.skilldistillery.neighborgood.entities.Category</class>
+		
+		<class>com.skilldistillery.neighborgood.entities.Contact</class>
+		
+		<class>com.skilldistillery.neighborgood.entities.Deed</class>
+		
+		<class>com.skilldistillery.neighborgood.entities.DeedTransaction</class>
+		
+		<class>com.skilldistillery.neighborgood.entities.Subcategory</class>
+		
 		<class>com.skilldistillery.neighborgood.entities.User</class>
+		
 		<!-- end entities -->
 
 		  <properties>
