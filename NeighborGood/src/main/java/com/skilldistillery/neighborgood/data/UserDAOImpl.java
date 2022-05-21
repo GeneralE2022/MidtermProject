@@ -13,7 +13,7 @@ public class UserDAOImpl implements UserDAO {
 		EntityManagerFactory emf = Persistence.createEntityManagerFactory("JPANeighborGood");
 		EntityManager em = emf.createEntityManager();
 		em.getTransaction().begin();
-		em.persist(user);
+		em.persist(newUser);
 		em.flush();
 		em.getTransaction().commit();
 		em.clear();
@@ -67,5 +67,18 @@ public class UserDAOImpl implements UserDAO {
 		emf.close();
 		return destroyed;
 
+	}
+
+	@Override
+	public Object findById(int i) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	@Override
+	public User getUserByUserNameAndPassword(String username, String password) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }
