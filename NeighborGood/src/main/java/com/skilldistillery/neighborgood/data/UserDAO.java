@@ -3,8 +3,10 @@ package com.skilldistillery.neighborgood.data;
 import com.skilldistillery.neighborgood.entities.User;
 
 public interface UserDAO {
-
-	User findById (int userId); 
-	User findByUsernameAndPassword(String username, String password); 
 	
+	public User create(User user);
+	public User update(int id, User user);
+	public boolean destroy(int id);
+	User createNewUser(User newUser);
+
 }
