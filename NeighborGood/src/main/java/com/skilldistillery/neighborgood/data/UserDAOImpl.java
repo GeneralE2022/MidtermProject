@@ -1,5 +1,6 @@
 package com.skilldistillery.neighborgood.data;
 
+import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Set;
 
@@ -19,6 +20,7 @@ public class UserDAOImpl implements UserDAO {
 	private EntityManager em;
 
 	private Map<Integer, User> users;
+	
 
 	@Override
 	public User createNewUser(User newUser) {
@@ -66,13 +68,20 @@ public class UserDAOImpl implements UserDAO {
 	}
 
 	@Override
-	public User getUserByUserNameAndPassword(String userName, String password) {
+	public User getUserByUserNameAndPassword(String username, String password) {
 		User u = null;
-
+		String jpql = "SELECT u FROM User u WHERE u.username = :un AND u.password = :up";
+		users = new LinkedHashMap<>();
+		User loginUser = em.createQuery(jpql, User.class)
+				.setParameter("un", username)
+				.setParameter("up", password)
+				.getSingleResult();
+		users.put(loginUser.getId(), loginUser);
 		Set<Integer> keys = users.keySet();
 		for (Integer key : keys) {
 			User user = users.get(key);
-			if (user.getUsername().equals(userName) && user.getPassword().equals(password)) {
+			System.out.println(user.toString());
+			if (user.getUsername().equals(username) && user.getPassword().equals(password)) {
 				u = user;
 				break;
 			}

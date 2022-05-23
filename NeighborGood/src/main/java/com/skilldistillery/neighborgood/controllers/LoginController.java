@@ -6,17 +6,18 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.skilldistillery.neighborgood.data.UserDAO;
+import com.skilldistillery.neighborgood.data.UserDAOImpl;
 import com.skilldistillery.neighborgood.entities.User;
 
 @Controller
 public class LoginController {
 
 	@Autowired
-	private UserDAO userDao;
+	private UserDAOImpl userDao;
 
 //	GET/POST login.do - If a user is logged in and requests login.do, they should be redirected to index.do.
 //	GET login.do displays the login view.
@@ -34,17 +35,18 @@ public class LoginController {
 //	If the login fails, display the login view.
 	
 	@RequestMapping(path = "login.do", method = RequestMethod.POST)
-	public String login(User user, HttpSession session) {
+	public String login(User user, HttpSession session, Model model) {
 		if (session.getAttribute("loggedInUser") != null) {
 			return "redirect:index.do";
 		}
 		user = userDao.getUserByUserNameAndPassword(user.getUsername(), user.getPassword());
+		System.out.println(user != null);
 		if (user != null) {
 			session.setAttribute("loggedInUser", user);
 			session.setAttribute("loginTime", LocalDateTime.now());
-			return "redirect:account.do";
+			return "account"; //TODO this was a redirect...how do we set that up?
 		} else {
-			return "login";
+			return "index";
 		}
 	}
 

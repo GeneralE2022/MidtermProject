@@ -9,4 +9,5 @@ public interface UserDAO {
 	User createNewUser(User newUser);
 	public Object findById(int i);
 	User getUserByUserNameAndPassword(String username, String password);
+	
 }

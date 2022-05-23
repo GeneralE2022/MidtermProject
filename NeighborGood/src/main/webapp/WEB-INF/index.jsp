@@ -14,7 +14,7 @@
 	<div align=right>
 		<form action="login.do" method="POST">
 			<%-- Error messages --%>
-			<input type="text" name="userName"> 
+			<input type="text" name="username"> 
 			<input type="password" name="password" /> 
 			<input type="submit" value="Log In">
 		</form>
