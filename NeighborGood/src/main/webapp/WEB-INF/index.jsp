@@ -17,7 +17,9 @@
 <c:if test="${newUserCreated}">
 <br>
 <h3><center>Registration successful!<br>
-Your user name is: ${newUser.username}</center>
+Your user name is: ${newUser.username}
+<br>
+Your street is: ${newContact.street}</center>
 </h3> 
 <br> 
 </c:if>
