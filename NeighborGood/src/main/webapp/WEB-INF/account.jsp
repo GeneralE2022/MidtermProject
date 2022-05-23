@@ -5,10 +5,12 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<jsp:include page="bootstrapHead.jsp"/>
 <title>Insert title here</title>
 
 </head>
 <body>
+<%@ include file="nav.jsp"%>
 
 	<h2>Your Details</h2>
 
@@ -27,5 +29,11 @@
 			<h3>Not logged in.</h3>
 		</c:otherwise>
 	</c:choose>
+
+	<br>
+	<br>
+
+	<a href="logout.do">Log out</a>
+
 </body>
 </html>

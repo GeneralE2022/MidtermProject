@@ -6,10 +6,21 @@
 <head>
 
 <link href="styles.css" rel="stylesheet">
+<jsp:include page="bootstrapHead.jsp"/>
 <title>Landing Page</title>
-<h1 class="page-header">neighborgood</h1>
 </head>
 <body>
+<%@ include file="nav.jsp"%>
+<br>
+<h1 class="page-header">neighborgood</h1>
+
+<c:if test="${newUserCreated}">
+<br>
+<h3><center>Registration successful!<br>
+Your user name is: ${newUser.username}</center>
+</h3> 
+<br> 
+</c:if>
 
 	<div align=right>
 		<form action="login.do" method="POST">
@@ -19,7 +30,7 @@
 			<input type="submit" value="Log In">
 		</form>
 
-		<br> <a href="createAccount.do">Create account</a>
+		<br> <a href="registration.do">Create account</a>
 	</div>
 	<br>
 	<br>

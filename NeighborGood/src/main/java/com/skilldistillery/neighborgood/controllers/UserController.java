@@ -22,16 +22,12 @@ public class UserController {
 	}
 
 	@RequestMapping(path = "registration.do")
-	public String createNewUser(String username, String password, String role, String firstName, String lastName, Model model) { //TODO need params from JSP, probably 
-		User newUser = new User();
-		newUser.setUsername(username);
-		newUser.setPassword(password);
-		newUser.setActive(1);
-		newUser.setRole(role);
-		newUser.setFirstName(firstName);
-		newUser.setLastName(lastName);
-		userDao.createNewUser(newUser);
-
-		return "account"; 
+	public String createNewUser(User user, Model model) { 
+		boolean newUserCreated = false;  
+		User newUser = userDao.createNewUser(user); 
+		model.addAttribute("newUser", newUser);
+		newUserCreated = newUser != null;
+		model.addAttribute("newUserCreated", newUserCreated); 
+		return "index"; 
 	}
 }

@@ -33,7 +33,7 @@ public class LoginController {
 //	If the userName and password match the DAO data, load the User object into session,
 //	and redirect to the account page, account.do. 
 //	If the login fails, display the login view.
-	
+
 	@RequestMapping(path = "login.do", method = RequestMethod.POST)
 	public String login(User user, HttpSession session, Model model) {
 		if (session.getAttribute("loggedInUser") != null) {
@@ -44,7 +44,7 @@ public class LoginController {
 		if (user != null) {
 			session.setAttribute("loggedInUser", user);
 			session.setAttribute("loginTime", LocalDateTime.now());
-			return "account"; //TODO this was a redirect...how do we set that up?
+			return "account"; // TODO this was a redirect...how do we set that up?
 		} else {
 			return "index";
 		}
@@ -54,16 +54,13 @@ public class LoginController {
 	@RequestMapping(path = "logout.do")
 	public String logout(HttpSession session) {
 		session.removeAttribute("loggedInUser");
-		return "redirect:index.do";
+		return "index";
 	}
 
-//	@RequestMapping(path="logout.do")
-//	public ModelAndView logout(HttpSession session) {
-//		session.removeAttribute("loggedInUser");
-//		ModelAndView mv = new ModelAndView();
-//		mv.setViewName("redirect:index.do");
-//		return mv;
-//	}
+	@RequestMapping(path = "registration.do", method = RequestMethod.GET)
+	public String goToRegistration() {
+		return "registration";
+	}
 
 	public boolean sessionTimedOut(HttpSession session) {
 		LocalDateTime loginTime = (LocalDateTime) session.getAttribute("loginTime");
