@@ -1,59 +1,53 @@
 package com.skilldistillery.neighborgood.data;
 
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
+import javax.persistence.PersistenceContext;
+import javax.transaction.Transactional;
+
+import org.springframework.stereotype.Service;
 
 import com.skilldistillery.neighborgood.entities.Deed;
 
+@Transactional
+@Service
 public class DeedDAOImpl implements DeedDAO {
 
+	@PersistenceContext
+	private EntityManager em;
+
 	@Override
-	public Deed create(Deed deed) {
-		EntityManagerFactory emf = Persistence.createEntityManagerFactory("JPANeighborGood");
-		EntityManager em = emf.createEntityManager();
-		em.getTransaction().begin();
+	public Deed createNewDeed(Deed deed) {
 		em.persist(deed);
 		em.flush();
-		em.getTransaction().commit();
-		em.clear();
-		em.close();
-		emf.close();
 		return deed;
 	}
 
 	@Override
-	public Deed update(int id, Deed deed) {
-		EntityManagerFactory emf = Persistence.createEntityManagerFactory("JPANeighborGood");
-		EntityManager em = emf.createEntityManager();
+	public Deed updateDeed(int id, Deed deedWithUpdates) {
 
 		Deed dbDeed = em.find(Deed.class, id);
 
 		if (dbDeed != null) {
-			em.getTransaction().begin();
-			dbDeed.setTitle(deed.getTitle());
-			dbDeed.setDescription(deed.getDescription());
-			dbDeed.setSubcategory(deed.getSubcategory());
-			
-			// TODO: command to update the deed's Category 
-			
-			em.getTransaction().commit();
+			dbDeed.setTitle(deedWithUpdates.getTitle());
+			dbDeed.setDescription(deedWithUpdates.getDescription());
+			dbDeed.setProvider(deedWithUpdates.getProvider());
+			dbDeed.setSubcategory(deedWithUpdates.getSubcategory());
+
+			/*
+			 * TODO: command to update the deed's Category Note on above: I am not sure this
+			 * is necessary since our Deed table doesn't touch so maybe there is an easy way
+			 * to do b/w those two tables/POJOs
+			 */
 		}
-		em.clear();
-		em.close();
-		emf.close();
 		return dbDeed;
 	}
 
 	@Override
-	public boolean destroy(int id) {
-		EntityManagerFactory emf = Persistence.createEntityManagerFactory("JPANeighborGood");
-		EntityManager em = emf.createEntityManager();
+	public boolean destroyDeed(int id) {
 
 		boolean destroyed = false;
 
 		Deed deedToRemove = em.find(Deed.class, id);
-		em.getTransaction().begin();
 
 		em.remove(deedToRemove);
 
@@ -62,12 +56,13 @@ public class DeedDAOImpl implements DeedDAO {
 			System.out.println("Remove success");
 		}
 
-		em.getTransaction().commit();
-
-		em.clear();
-		em.close();
-		emf.close();
 		return destroyed;
 
+	}
+
+	@Override
+	public Deed findDeedById(int id) {
+		Deed foundDeed = em.find(Deed.class, id);
+		return foundDeed;
 	}
 }
