@@ -4,9 +4,10 @@ import com.skilldistillery.neighborgood.entities.User;
 
 public interface UserDAO {
 	
-	public User update(int id, User user);
+	public User createNewUser(User newUser);
+	User updateUser(int id, User user);
+	User deleteUser();
 	public boolean destroy(int id);
-	User createNewUser(User newUser);
 	public Object findById(int i);
 	User getUserByUserNameAndPassword(String username, String password);
 	
