@@ -30,9 +30,9 @@ public class UserDAOImpl implements UserDAO {
 	}
 
 	@Override
-	public User update(int id, User user) {
-
+	public User updateUser (int id, User user) {
 		User dbUser = em.find(User.class, id);
+		System.out.println(dbUser);
 
 		if (dbUser != null) {
 			dbUser.setFirstName(user.getFirstName());
@@ -42,6 +42,7 @@ public class UserDAOImpl implements UserDAO {
 		}
 		return dbUser;
 	}
+	
 
 	@Override
 	public boolean destroy(int id) {
@@ -87,5 +88,11 @@ public class UserDAOImpl implements UserDAO {
 			}
 		}
 		return u;
+	}
+
+	@Override
+	public User deleteUser() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

@@ -14,7 +14,7 @@ public class ContactDAOImpl implements ContactDAO {
 
 	@PersistenceContext
 	private EntityManager em;
-	
+
 	@Override
 	public Contact createNewContact(Contact contact) {
 		em.persist(contact);
@@ -23,7 +23,7 @@ public class ContactDAOImpl implements ContactDAO {
 	}
 
 	@Override
-	public Contact update(int id, Contact contact) {
+	public Contact updateContact(int id, Contact contact) {
 
 		Contact dbContact = em.find(Contact.class, id);
 
@@ -36,7 +36,7 @@ public class ContactDAOImpl implements ContactDAO {
 			dbContact.setEmail(contact.getEmail());
 			dbContact.setZipCode(contact.getZipCode());
 		}
-		
+
 		return dbContact;
 	}
 
@@ -56,5 +56,10 @@ public class ContactDAOImpl implements ContactDAO {
 
 		return destroyed;
 
+	}
+
+	public Contact findById(int id) {
+		Contact contact = em.find(Contact.class, id);
+		return contact;
 	}
 }

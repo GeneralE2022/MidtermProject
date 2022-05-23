@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.skilldistillery.neighborgood.data.ContactDAOImpl;
 import com.skilldistillery.neighborgood.data.UserDAOImpl;
 import com.skilldistillery.neighborgood.entities.User;
 
@@ -18,6 +19,9 @@ public class LoginController {
 
 	@Autowired
 	private UserDAOImpl userDao;
+	
+	@Autowired
+	private ContactDAOImpl contactDao;
 
 //	GET/POST login.do - If a user is logged in and requests login.do, they should be redirected to index.do.
 //	GET login.do displays the login view.
@@ -44,6 +48,7 @@ public class LoginController {
 		if (user != null) {
 			session.setAttribute("loggedInUser", user);
 			session.setAttribute("loginTime", LocalDateTime.now());
+			session.setAttribute("loggedInUserContact", contactDao.findById(user.getId()));
 			return "account"; // TODO this was a redirect...how do we set that up?
 		} else {
 			return "index";

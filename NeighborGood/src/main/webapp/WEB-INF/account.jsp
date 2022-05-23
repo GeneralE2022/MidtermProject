@@ -14,15 +14,14 @@
 
 	<c:choose>
 		<c:when test="${not empty sessionScope.loggedInUser }">
-
+			<form action="updateProfile.do" method="POST">
 
 			<div class="container">
 				<div class="row">
 					<div class="col">
 						<h2>
 							<br> <br>
-							<c:out value="${sessionScope.loggedInUser.username}" />
-							's Account Details
+							<c:out value="${sessionScope.loggedInUser.username}" />'s Account Details
 						</h2>
 					</div>
 					<div class="col"></div>
@@ -34,9 +33,10 @@
 						<h4>Account ID:</h4>
 					</div>
 					<div class="col">
-						<h4>${sessionScope.loggedInUser.id}</h4>
+						
 					</div>
-					<div class="col"></div>
+					<div class="col">
+					<input type="text" name="existingId" value="${sessionScope.loggedInUser.id }" readonly></div>
 				</div>
 
 				<div class="row">
@@ -47,8 +47,7 @@
 						<h4>${sessionScope.loggedInUser.firstName }</h4>
 					</div>
 					<div class="col">
-						<form action="update.do" method="POST">
-							<input type="text" name="firstname">
+							<input type="text" name="firstName" value="${sessionScope.loggedInUser.firstName }">
 					</div>
 				</div>
 
@@ -60,9 +59,38 @@
 						<h4>${sessionScope.loggedInUser.lastName }</h4>
 					</div>
 					<div class="col">
-						<input type="text" name="lastname">
+						<input type="text" name="lastName"
+							value="${sessionScope.loggedInUser.lastName }">
 					</div>
 				</div>
+				
+				<div class="row">
+					<div class="col">
+						<h4>User name:</h4>
+					</div>
+					<div class="col">
+						<h4>${sessionScope.loggedInUser.username }</h4>
+					</div>
+					<div class="col">
+						<input type="text" name="username"
+							value="${sessionScope.loggedInUser.username }" readonly>
+					</div>
+				</div>
+				
+				<div class="row">
+					<div class="col">
+						<h4>Password:</h4>
+					</div>
+					<div class="col">
+						<h4>${sessionScope.loggedInUser.password }</h4>
+					</div>
+					<div class="col">
+						<input type="password" name="password"
+							value="${sessionScope.loggedInUser.password }" readonly>
+					</div>
+				</div>
+				
+				
 			</div>
 
 			<div class="container">
@@ -80,10 +108,10 @@
 						<h4>Address:</h4>
 					</div>
 					<div class="col">
-						<h4>***insert***</h4>
+					<h4>${sessionScope.loggedInUserContact.street}</h4>
 					</div>
 					<div class="col">
-						<input type="text" name="street">
+						<input type="text" name="street" value="${sessionScope.loggedInUserContact.street}">
 					</div>
 				</div>
 
@@ -92,10 +120,10 @@
 						<h4>City:</h4>
 					</div>
 					<div class="col">
-						<h4>***insert***</h4>
+						<h4>${sessionScope.loggedInUserContact.city}</h4>
 					</div>
 					<div class="col">
-						<input type="text" name="city">
+						<input type="text" name="city" value="${sessionScope.loggedInUserContact.city}">
 					</div>
 				</div>
 
@@ -104,10 +132,10 @@
 						<h4>State:</h4>
 					</div>
 					<div class="col">
-						<h4>***insert***</h4>
+						<h4>${sessionScope.loggedInUserContact.state}</h4>
 					</div>
 					<div class="col">
-						<input type="text" name="state">
+						<input type="text" name="state" value="${sessionScope.loggedInUserContact.state}">
 					</div>
 				</div>
 
@@ -116,10 +144,10 @@
 						<h4>Zip code:</h4>
 					</div>
 					<div class="col">
-						<h4>***insert***</h4>
+						<h4>${sessionScope.loggedInUserContact.zipCode}</h4>
 					</div>
 					<div class="col">
-						<input type="text" name="zipcode">
+						<input type="text" name="zipCode" value="${sessionScope.loggedInUserContact.zipCode}">
 					</div>
 				</div>
 
@@ -128,10 +156,10 @@
 						<h4>Primary phone:</h4>
 					</div>
 					<div class="col">
-						<h4>***insert***</h4>
+						<h4>${sessionScope.loggedInUserContact.phone}</h4>
 					</div>
 					<div class="col">
-						<input type="text" name="phone1">
+						<input type="text" name="phone" value="${sessionScope.loggedInUserContact.phone}">
 					</div>
 				</div>
 
@@ -140,10 +168,10 @@
 						<h4>Secondary phone:</h4>
 					</div>
 					<div class="col">
-						<h4>***insert***</h4>
+						<h4>${sessionScope.loggedInUserContact.phone2}</h4>
 					</div>
 					<div class="col">
-						<input type="text" name="phone2">
+						<input type="text" name="phone2" value="${sessionScope.loggedInUserContact.phone2}">
 					</div>
 				</div>
 
@@ -152,11 +180,11 @@
 						<h4>Email:</h4>
 					</div>
 					<div class="col">
-						<h4>***insert***</h4>
+						<h4>${sessionScope.loggedInUserContact.email}</h4>
 					</div>
 					<div class="col">
-						<input type="text" name="email"> <br>
-						<input type="submit" value="Update">
+						<input type="text" name="email" value="${sessionScope.loggedInUserContact.email}"> <br> <input
+							type="submit" value="Update">
 						</form>
 					</div>
 				</div>
