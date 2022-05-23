@@ -14,7 +14,7 @@ import com.skilldistillery.neighborgood.entities.User;
 @Transactional
 @Service
 public class UserDAOImpl implements UserDAO {
-	
+
 	@PersistenceContext
 	private EntityManager em;
 
@@ -65,19 +65,18 @@ public class UserDAOImpl implements UserDAO {
 		return null;
 	}
 
+	@Override
+	public User getUserByUserNameAndPassword(String userName, String password) {
+		User u = null;
 
-	  @Override
-	  public User getUserByUserNameAndPassword(String userName, String password) {
-	    User u = null;
-	    
-	    Set<Integer> keys = users.keySet();
-	    for (Integer key : keys) {
-	      User user = users.get(key);
-	      if(user.getUsername().equals(userName) && user.getPassword().equals(password)) {
-	        u = user;
-	        break;
-	      }
-	    }
-	    return u;
-	  }
+		Set<Integer> keys = users.keySet();
+		for (Integer key : keys) {
+			User user = users.get(key);
+			if (user.getUsername().equals(userName) && user.getPassword().equals(password)) {
+				u = user;
+				break;
+			}
+		}
+		return u;
+	}
 }

@@ -18,32 +18,33 @@ public class LoginController {
 	@Autowired
 	private UserDAO userDao;
 
-//	@RequestMapping(path = "login.do", method = RequestMethod.GET)
-//	public String goToLogin(HttpSession session) {
-//		if (session.getAttribute("loggedInUser") != null) {
-//			return "redirect:index";
-//		}
-//		return "account";
-//	}
+//	GET/POST login.do - If a user is logged in and requests login.do, they should be redirected to index.do.
+//	GET login.do displays the login view.
+	@RequestMapping(path = "login.do", method = RequestMethod.GET)
+	public String goToLogin(HttpSession session) {
+		if (session.getAttribute("loggedInUser") != null) {
+			return "redirect:index.do";
+		}
+		return "login";
+	}
 
 //	POST login.do attempts to log in the user by retrieving it from the DAO. 
 //	If the userName and password match the DAO data, load the User object into session,
 //	and redirect to the account page, account.do. 
 //	If the login fails, display the login view.
-
+	
 	@RequestMapping(path = "login.do", method = RequestMethod.POST)
 	public String login(User user, HttpSession session) {
-//		if (session.getAttribute("loggedInUser") != null) {
-//			return "redirect:account";
-//		}
+		if (session.getAttribute("loggedInUser") != null) {
+			return "redirect:index.do";
+		}
 		user = userDao.getUserByUserNameAndPassword(user.getUsername(), user.getPassword());
 		if (user != null) {
 			session.setAttribute("loggedInUser", user);
 			session.setAttribute("loginTime", LocalDateTime.now());
-			return "redirect:test";
+			return "redirect:account.do";
 		} else {
-			System.out.println(user);
-			return "account";
+			return "login";
 		}
 	}
 
@@ -51,7 +52,7 @@ public class LoginController {
 	@RequestMapping(path = "logout.do")
 	public String logout(HttpSession session) {
 		session.removeAttribute("loggedInUser");
-		return "redirect:account";
+		return "redirect:index.do";
 	}
 
 //	@RequestMapping(path="logout.do")

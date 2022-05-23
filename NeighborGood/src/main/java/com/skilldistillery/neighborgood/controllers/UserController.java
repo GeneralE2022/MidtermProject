@@ -21,7 +21,7 @@ public class UserController {
 		return "index";
 	}
 
-	@RequestMapping(path = "register.do") //TODO need actual DO name
+	@RequestMapping(path = "registration.do")
 	public String createNewUser(String username, String password, String role, String firstName, String lastName, Model model) { //TODO need params from JSP, probably 
 		User newUser = new User();
 		newUser.setUsername(username);
@@ -32,6 +32,6 @@ public class UserController {
 		newUser.setLastName(lastName);
 		userDao.createNewUser(newUser);
 
-		return "registered"; //TODO are we taking them to a "Registered" page, or just to the account page to see all their details?
+		return "account"; 
 	}
 }
