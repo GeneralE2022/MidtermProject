@@ -5,6 +5,7 @@ import java.time.LocalDateTime;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,9 +18,11 @@ import com.skilldistillery.neighborgood.entities.User;
 @Controller
 public class LoginController {
 
+	@Lazy
 	@Autowired
 	private UserDAOImpl userDao;
 	
+	@Lazy
 	@Autowired
 	private ContactDAOImpl contactDao;
 

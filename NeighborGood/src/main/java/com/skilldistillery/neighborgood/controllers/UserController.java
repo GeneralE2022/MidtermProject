@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.skilldistillery.neighborgood.data.ContactDAO;
 import com.skilldistillery.neighborgood.data.UserDAO;
@@ -63,8 +64,14 @@ public class UserController {
 	public String goToAccount() {
 		return "account";
 	}
+	
+	@RequestMapping(path = "deactivateAccount.do")
+	public String deactviateUser(int deactivateId, Model m) {
+		
+		boolean deactivated = userDao.deactivateUser(deactivateId);
+		m.addAttribute("deactivated", deactivated);
+		return "accountDeactivated";
+	}
 
-//	public String destroy(int id) {
-//		boolean 
-//	}
+
 }

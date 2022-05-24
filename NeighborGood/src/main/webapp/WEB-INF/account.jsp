@@ -10,6 +10,10 @@
 
 </head>
 <body>
+
+<div class="container-lg">
+
+
 	<%@ include file="nav.jsp"%>
 <a href="requestCreateDeed.do">Create new deed</a>
 	<c:choose>
@@ -186,11 +190,18 @@
 						<input type="text" name="email" value="${sessionScope.loggedInUserContact.email}"> <br> <input
 							type="submit" value="Update">
 						</form>
+						
+
 					</div>
 				</div>
 
 			</div>
 
+
+		<h5>Would you like to deactivate your account?</h5>	<br>
+		<a href="deactivateAccount.do?deactivateId=${sessionScope.loggedInUser.id}">Click here to deactivate your account.</a>				
+					
+						
 
 		</c:when>
 
@@ -203,6 +214,6 @@
 	<br>
 
 	<!-- <a href="logout.do">Log out (TODO: place into nav bar)</a> -->
-
+</div> 
 </body>
 </html>

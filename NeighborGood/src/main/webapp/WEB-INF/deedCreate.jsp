@@ -10,6 +10,7 @@
 
 </head>
 <body>
+
 	<%@ include file="nav.jsp"%>
 <div>
 	
@@ -48,6 +49,7 @@
 	
 		</div>
 		
+
 
 </body>
 </html>

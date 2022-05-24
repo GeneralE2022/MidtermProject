@@ -9,6 +9,9 @@
 <title>Create a new account</title>
 </head>
 <body>
+
+<div class="container-lg">
+
 <%@ include file="nav.jsp"%>
 <h1>Register New Account</h1>
 
@@ -56,6 +59,6 @@
 
 	</form>
 
-
+</div>
 </body>
 </html>

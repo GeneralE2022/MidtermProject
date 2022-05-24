@@ -40,26 +40,16 @@ public class ContactDAOImpl implements ContactDAO {
 		return dbContact;
 	}
 
-	@Override
-	public boolean destroy(int id) {
-
-		boolean destroyed = false;
-
-		Contact contactToRemove = em.find(Contact.class, id);
-
-		em.remove(contactToRemove);
-
-		if (contactToRemove == null) {
-			destroyed = !em.contains(contactToRemove);
-			System.out.println("Remove success");
-		}
-
-		return destroyed;
-
-	}
-
 	public Contact findById(int id) {
 		Contact contact = em.find(Contact.class, id);
+		return contact;
+	}
+
+	public Contact findContactByUserId(int userId) {
+		Contact contact = new Contact();
+		String JPQL = "SELECT c FROM Contact c WHERE user_id = " + userId;
+		contact = em.createQuery(JPQL, Contact.class).getSingleResult();
+
 		return contact;
 	}
 }

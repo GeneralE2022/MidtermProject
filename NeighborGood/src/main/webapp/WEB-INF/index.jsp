@@ -6,71 +6,64 @@
 <head>
 
 <link href="styles.css" rel="stylesheet">
-<jsp:include page="bootstrapHead.jsp"/>
+<jsp:include page="bootstrapHead.jsp" />
 <title>Landing Page</title>
 </head>
 <body>
-<%@ include file="nav.jsp"%>
-<br>
-<h1 class="page-header">neighborgood</h1>
 
-<c:if test="${newUserCreated}">
-<br>
-<h3><center>Registration successful!<br>
-Your user name is: ${newUser.username}
-<br>
-Your street is: ${newContact.street}</center>
-</h3> 
-<br> 
-</c:if>
+	<div class="container-lg">
 
-	<div align=right>
-		<form action="login.do" method="POST">
-			<%-- Error messages --%>
-			<input type="text" name="username"> 
-			<input type="password" name="password" /> 
-			<input type="submit" value="Log In">
-		</form>
+		<%@ include file="nav.jsp"%>
+		<br>
+		<h1 class="page-header">neighborgood</h1>
 
+		<c:if test="${newUserCreated}">
+			<br>
+			<h3>
+				<center>
+					Registration successful!<br> Your user name is:
+					${newUser.username} <br> Your street is: ${newContact.street}
+				</center>
+			</h3>
+			<br>
+		</c:if>
+
+		<c:choose>
+			<c:when test="${empty sessionScope.loggedInUser }">
+				<div align=right>
+					<form action="login.do" method="POST">
+						<input type="text" name="username" placeholder="User name"> <br>
+						<input type="password" name="password" placeholder="Password" /> <br>
+						<input type="submit" value="Log In">
+					</form>
+			</c:when>
+		</c:choose>
 		<br> <a href="registration.do">Create account</a>
 	</div>
 	<br>
 	<br>
 
+	<div class="container-lg">
+	
+		<div class="row">
+			<div class="col"><h3>Yardwork</h3></div>
+			<div class="col"><h3>Home Improvement</h3></div>
+			<div class="col"><h3>Pet Care</h3></div>
+			<div class="col"><h3>Repair/Maintenance</h3></div>
 
-	<table width=800px>
+		<div class="row">
+		
+			<c:forEach var="deed" items="${deeds}">
+				<div class="col"><h4><a href="">${deed.title}</a></h4></div>
+			</c:forEach>
 
-		<thead>
-			<tr>
-				<th>Yardwork</th>
-				<th>Home Improvement</th>
-				<th>Pet Care</th>
-				<th>Repair/Maintenance</th>
-			</tr>
-		</thead>
-		<c:forEach var="subcategory" items="${subcategories}">
-
-		</c:forEach>
-		<tr>
-			<td>
-		</tr>
-	</table>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+				<%-- <a href="getToken.do?token=${crypto.id}">${crypto.name}</a> --%>
+				
+			</div>
+		</div>
+		
 </body>
 <footer>
-	<center>All Rights Reserved Dismal Justice 2022</center>
+	<p style="text-align:center;">All Rights Reserved Dismal Justice 2022</p>
 </footer>
 </html>
