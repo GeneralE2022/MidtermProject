@@ -1,5 +1,8 @@
 package com.skilldistillery.neighborgood.data;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
@@ -32,8 +35,6 @@ public class DeedDAOImpl implements DeedDAO {
 			dbDeed.setDescription(deedWithUpdates.getDescription());
 			dbDeed.setProvider(deedWithUpdates.getProvider());
 			dbDeed.setSubcategory(deedWithUpdates.getSubcategory());
-
-			
 		}
 		return dbDeed;
 	}
@@ -53,12 +54,27 @@ public class DeedDAOImpl implements DeedDAO {
 		}
 
 		return destroyed;
-
 	}
 
 	@Override
 	public Deed findDeedById(int id) {
 		Deed foundDeed = em.find(Deed.class, id);
 		return foundDeed;
+	}
+
+	@Override
+	public List<Deed> findAllDeeds() {
+		String jpql = "SELECT d FROM Deed d";
+		List<Deed> deeds;
+		deeds = em.createQuery(jpql, Deed.class).getResultList(); 
+		return deeds;
+	}
+
+	@Override
+	public List<Deed> findDeedsByUserId(int id) {
+		String jpql = "SELECT d FROM Deed d WHERE d = " + id;
+		List<Deed> deeds;
+		deeds = em.createQuery(jpql, Deed.class).getResultList(); 
+		return deeds;
 	}
 }

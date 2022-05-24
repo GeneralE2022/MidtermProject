@@ -10,30 +10,34 @@
 
 </head>
 <body>
-	<%@ include file="nav.jsp"%>
-	<div>
-		<c:choose>
-			<c:when test="${not empty deed}">
-				<div align="center">
-						<h2>${deed.title} </h2>
+	<div class="container-lg">
+		<%@ include file="nav.jsp"%>
+		<div>
+			<c:choose>
+				<c:when test="${not empty deed}">
+					<div align="center">
+						<h2>${deed.title}</h2>
 						<h4>ID: ${deed.id}</h4>
-						
-					<ul>
-						<li>${deed.description}</li>
-						<li>Deed offered by: ${deed.provider.username}</li>
-						<li>Subcategory: ${deed.subcategory.title}</li>
-					</ul>
-					<c:if test="${sessionScope.loggedInUser.id == deed.provider.id}">
-						<a href="requestDeedUpdate.do?deedId=${deed.id}">Modify this deed posting</a>
-						<a href="requestDeedRemove.do?deedId=${deed.id}">Delete this deed posting</a>
-					</c:if>
-				</div>
-			</c:when>
-			<c:otherwise>
+
+						<ul>
+							<li>${deed.description}</li>
+							<li>Deed offered by: ${deed.provider.username}</li>
+							<li>Subcategory: ${deed.subcategory.title}</li>
+						</ul>
+						<c:if test="${sessionScope.loggedInUser.id == deed.provider.id}">
+							<a href="requestDeedUpdate.do?deedId=${deed.id}">Modify this
+								deed posting</a>
+							<a href="requestDeedRemove.do?deedId=${deed.id}">Delete this
+								deed posting</a>
+						</c:if>
+					</div>
+				</c:when>
+				<c:otherwise>
 			No deed to display :(
 			</c:otherwise>
-		</c:choose>
-		
+			</c:choose>
+
+		</div>
 	</div>
 </body>
 </html>

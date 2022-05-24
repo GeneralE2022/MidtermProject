@@ -54,11 +54,9 @@
 		<div class="row">
 		
 			<c:forEach var="deed" items="${deeds}">
-				<div class="col"><h4><a href="">${deed.title}</a></h4></div>
+				<div class="row"><h4><a href="deedView.do?deedId=${deed.id }">${deed.title}</a></h4></div>
 			</c:forEach>
 
-				<%-- <a href="getToken.do?token=${crypto.id}">${crypto.name}</a> --%>
-				
 			</div>
 		</div>
 		

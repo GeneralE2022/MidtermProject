@@ -50,6 +50,7 @@ public class LoginController {
 		System.out.println(user != null);
 		if (user != null) {
 			session.setAttribute("loggedInUser", user);
+			session.setAttribute("loggedInUserId", user.getId());
 			session.setAttribute("loggedInUserContact", contactDao.findById(user.getId()));
 			session.setAttribute("loginTime", LocalDateTime.now());
 			return "redirect:accountRedirect.do"; // TODO this was a redirect...how do we set that up?

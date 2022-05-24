@@ -3,10 +3,10 @@ package com.skilldistillery.neighborgood.controllers;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import com.skilldistillery.neighborgood.data.DeedDAO;
 import com.skilldistillery.neighborgood.data.SubcategoryDAO;
@@ -16,12 +16,15 @@ import com.skilldistillery.neighborgood.entities.Deed;
 @Controller
 public class DeedController {
 
+	@Lazy
 	@Autowired
 	private DeedDAO deedDao;
 	
+	@Lazy
 	@Autowired
 	private SubcategoryDAO subcategoryDao;
 	
+	@Lazy
 	@Autowired
 	private UserDAO userDao;
 	
@@ -29,6 +32,12 @@ public class DeedController {
 	public String requestCreateDeed() {
 		
 		return "deedCreate";
+	}
+	
+	@RequestMapping(path = "deedView.do")
+	public String viewDeed(Model m, int deedId) {
+		m.addAttribute("deed", deedDao.findDeedById(deedId)); 
+		return "deedView";
 	}
 
 	@RequestMapping(path = "createDeed.do")

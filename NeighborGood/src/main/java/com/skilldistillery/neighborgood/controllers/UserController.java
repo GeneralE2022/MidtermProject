@@ -1,31 +1,41 @@
 package com.skilldistillery.neighborgood.controllers;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.skilldistillery.neighborgood.data.ContactDAO;
+import com.skilldistillery.neighborgood.data.DeedDAO;
 import com.skilldistillery.neighborgood.data.UserDAO;
 import com.skilldistillery.neighborgood.entities.Contact;
+import com.skilldistillery.neighborgood.entities.Deed;
 import com.skilldistillery.neighborgood.entities.User;
 
 @Controller
 public class UserController {
 
+	@Lazy
 	@Autowired
 	private UserDAO userDao;
 
+	@Lazy
 	@Autowired
 	private ContactDAO contactDao;
+	
+	@Lazy
+	@Autowired
+	private DeedDAO deedDao;
 
 	@RequestMapping(path = { "/", "home.do" })
 	public String home(Model model) {
-		model.addAttribute("DEBUG", userDao.findUserById(1));
-
+		List<Deed> deeds = deedDao.findAllDeeds(); 
+		model.addAttribute("deeds", deeds); 
 		return "index";
 	}
 
@@ -61,7 +71,10 @@ public class UserController {
 	}
 	
 	@RequestMapping(path = "account.do")
-	public String goToAccount() {
+	public String goToAccount(Model model, HttpSession session) {
+		Integer id = (Integer) session.getAttribute("loggedInUserId"); 
+		List<Deed> deeds = deedDao.findDeedsByUserId(id); 
+		model.addAttribute("deeds", deeds); 
 		return "account";
 	}
 	
