@@ -6,18 +6,18 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <jsp:include page="bootstrapHead.jsp" />
-<title>Deed Create Test</title>
+<title>Deed Test</title>
 
 </head>
 <body>
 	<%@ include file="nav.jsp"%>
-<div>
-	
-	<form action="createDeed.do" method="POST">
+	<div>
+		<form action="runDeedUpdate.do?deedId=${deedBeingUpdated.id}" method="POST">
+		<input type="text" name="deedId" size="25" value="${deedBeingUpdated.id}" hidden readonly/> <br> 
 	<label for="title"> <strong>Title:</strong></label> <br>
-		<input type="text" name="title" size="25" /> <br> 
+		<input type="text" name="title" size="25" value="${deedBeingUpdated.title}"/> <br> 
 	<label for="description"> <strong>Description:</strong></label> <br>
-		<input type="text" name="descrition" size="25" /> <br> 
+		<input type="text" size="100" type="text" name="description" value="${deedBeingUpdated.description}"></textarea> <br> 
 	<!-- <label for="provider"> <strong>Provider:</strong></label> <br> -->
 		<input type="hidden" name="provider" size="3" value="${sessionScope.loggedInUser.id}" readonly/> <br> 
 	<label for="subcategory"> <strong>Subcategory:</strong></label> <br>
@@ -44,10 +44,8 @@
 			<option value="43"> - Grooming</option></optgroup>
 		</select>
 	
-	<input type="submit" value="Create Deed Offering" />
-	
-		</div>
+	<input type="submit" value="Save Changes" />
 		
-
+	</div>
 </body>
 </html>
