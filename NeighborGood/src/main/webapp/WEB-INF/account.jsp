@@ -10,6 +10,10 @@
 
 </head>
 <body>
+
+<div class="container-lg">
+
+
 	<%@ include file="nav.jsp"%>
 <a href="requestCreateDeed.do">Create new deed</a>
 	<c:choose>
@@ -210,6 +214,6 @@
 	<br>
 
 	<!-- <a href="logout.do">Log out (TODO: place into nav bar)</a> -->
-
+</div> 
 </body>
 </html>
