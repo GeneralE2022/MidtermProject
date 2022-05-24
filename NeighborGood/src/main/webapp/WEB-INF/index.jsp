@@ -15,53 +15,81 @@
 
 		<%@ include file="nav.jsp"%>
 		<br>
-		<h1 class="page-header">neighborgood</h1>
 
-		<c:if test="${newUserCreated}">
-			<br>
-			<h3>
-				<center>
-					Registration successful!<br> Your user name is:
-					${newUser.username} <br> Your street is: ${newContact.street}
-				</center>
-			</h3>
-			<br>
-		</c:if>
+		  	<div class="row row-cols-3">
+		  	<div class="col">
+			</div>
+			
+			<div class="col">
+				<a href="home.do"> <img src="../img/logo1.png" alt="logo" width="525"></a>
+			</div>
 
-		<c:choose>
-			<c:when test="${empty sessionScope.loggedInUser }">
-				<div align=right>
-					<form action="login.do" method="POST">
-						<input type="text" name="username" placeholder="User name"> <br>
-						<input type="password" name="password" placeholder="Password" /> <br>
-						<input type="submit" value="Log In">
-					</form>
-			</c:when>
-		</c:choose>
-		<br> <a href="registration.do">Create account</a>
+
+		<div class="col">
+			<c:choose>
+				<c:when test="${empty sessionScope.loggedInUser }">
+					<div align=right>
+						<form action="login.do" method="POST">
+							<input type="text" name="username" placeholder="User name">
+							<br> <input type="password" name="password"
+								placeholder="Password" /> <br> <input type="submit"
+								value="Log In">
+						</form>
+						<br> <a href="registration.do">Create account</a>
+					</div>
+				</c:when>
+			</c:choose>
+			
+		</div>
+	</div>
 	</div>
 	<br>
 	<br>
 
+	<c:if test="${newUserCreated}">
+		<div class="col">
+					<br>
+					<div class="d-flex justify-content-center">
+					<h3>Registration successful!<br> Your user name is:
+						${newUser.username} <br> Your street is: ${newContact.street}</h3>
+					</div>
+				<br>
+		</div>
+	</c:if>
+
+
 	<div class="container-lg">
-	
-		<div class="row">
-			<div class="col"><h3>Yardwork</h3></div>
-			<div class="col"><h3>Home Improvement</h3></div>
-			<div class="col"><h3>Pet Care</h3></div>
-			<div class="col"><h3>Repair/Maintenance</h3></div>
 
 		<div class="row">
-		
-			<c:forEach var="deed" items="${deeds}">
-				<div class="row"><h4><a href="deedView.do?deedId=${deed.id }">${deed.title}</a></h4></div>
-			</c:forEach>
+			<div class="col">
+				<h3>Yardwork</h3>
+			</div>
+			<div class="col">
+				<h3>Home Improvement</h3>
+			</div>
+			<div class="col">
+				<h3>Pet Care</h3>
+			</div>
+			<div class="col">
+				<h3>Repair/Maintenance</h3>
+			</div>
+
+			<div class="row">
+
+				<c:forEach var="deed" items="${deeds}">
+					<div class="row">
+						<h4>
+							<a href="deedView.do?deedId=${deed.id }">${deed.title}</a>
+						</h4>
+					</div>
+				</c:forEach>
 
 			</div>
 		</div>
-		
+	</div>
 </body>
 <footer>
-	<p style="text-align:center;">All Rights Reserved Dismal Justice 2022</p>
+	<p style="text-align: center;">All Rights Reserved Dismal Justice
+		2022</p>
 </footer>
 </html>
