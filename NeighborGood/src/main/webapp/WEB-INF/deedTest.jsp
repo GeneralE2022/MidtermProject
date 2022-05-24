@@ -10,6 +10,9 @@
 
 </head>
 <body>
+
+<div class="container-lg">
+
 	<%@ include file="nav.jsp"%>
 <div>
 	<c:choose>
@@ -26,6 +29,6 @@
 	</c:choose>
 		</div>
 		
-
+</div>
 </body>
 </html>
