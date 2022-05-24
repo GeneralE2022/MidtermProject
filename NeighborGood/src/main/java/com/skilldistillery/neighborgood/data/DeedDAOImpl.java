@@ -33,11 +33,7 @@ public class DeedDAOImpl implements DeedDAO {
 			dbDeed.setProvider(deedWithUpdates.getProvider());
 			dbDeed.setSubcategory(deedWithUpdates.getSubcategory());
 
-			/*
-			 * TODO: command to update the deed's Category Note on above: I am not sure this
-			 * is necessary since our Deed table doesn't touch so maybe there is an easy way
-			 * to do b/w those two tables/POJOs
-			 */
+			
 		}
 		return dbDeed;
 	}

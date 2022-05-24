@@ -11,7 +11,7 @@
 </head>
 <body>
 	<%@ include file="nav.jsp"%>
-
+<a href="requestCreateDeed.do">Create new deed</a>
 	<c:choose>
 		<c:when test="${not empty sessionScope.loggedInUser }">
 			<form action="updateProfile.do" method="POST">
@@ -195,14 +195,14 @@
 		</c:when>
 
 		<c:otherwise>
-			<h3>Not logged in.</h3>
+			<h3>Not logged in.</h3>7
 		</c:otherwise>
 	</c:choose>
 
 	<br>
 	<br>
 
-	<a href="logout.do">Log out (TODO: place into nav bar)</a>
+	<!-- <a href="logout.do">Log out (TODO: place into nav bar)</a> -->
 
 </body>
 </html>

@@ -1,9 +1,12 @@
 package com.skilldistillery.neighborgood.data;
 
+import com.skilldistillery.neighborgood.entities.Subcategory;
+
 public interface SubcategoryDAO {
 	
-//	public Contact create(Contact contact);
-//	public Contact update(int id, Contact contact);
-//	public boolean destroy(int id);
+	public Subcategory createSubcategory(Subcategory subcategory);
+	public Subcategory updateSubcategory(int id, Subcategory subcategory);
+	public Subcategory findSubcategoryById(int id);
+	public boolean destroySubcategory(int id);
 
 }

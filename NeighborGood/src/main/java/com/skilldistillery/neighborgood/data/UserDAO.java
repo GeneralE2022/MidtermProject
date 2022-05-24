@@ -8,7 +8,7 @@ public interface UserDAO {
 	public User updateUser(int id, User user);
 	public User deleteUser();
 	public boolean destroy(int id);
-	public Object findById(int i);
+	public User findUserById(int i);
 	public User getUserByUserNameAndPassword(String username, String password);
 	
 }
