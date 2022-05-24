@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.skilldistillery.neighborgood.data.DeedDAO;
 import com.skilldistillery.neighborgood.data.SubcategoryDAO;
@@ -27,7 +28,7 @@ public class DeedController {
 	@RequestMapping(path = "requestCreateDeed.do")
 	public String requestCreateDeed() {
 		
-		return "deedCreateTest";
+		return "deedCreate";
 	}
 
 	@RequestMapping(path = "createDeed.do")
@@ -48,22 +49,37 @@ public class DeedController {
 		newDeedCreated = newDeed != null;
 		model.addAttribute("deed", newDeed);
 		model.addAttribute("newDeedCreated", newDeedCreated);
-		return "deedTest";
+		return "deedView";
 	}
 	
 	@RequestMapping(path = "requestDeedUpdate.do") // When user clicks "update this deed"
 	public String updateDeed(int deedId, Model model) {
+		System.out.println(deedId);
 		Deed deedBeingUpdated = deedDao.findDeedById(deedId);
-		
+//		
 		model.addAttribute("deedBeingUpdated", deedBeingUpdated);
-		return "updatingDeed"; // User is taken to a dedicated JSP with input forms to change deed details
+		return "deedUpdate"; // User is taken to a dedicated JSP with input forms to change deed details
 	}
 	
 	@RequestMapping(path = "runDeedUpdate.do") // When user clicks "Save Updates" etc after making changes on updatingDeed.jsp
-	public String runDeedUpdate(Deed deedWithUpdates, Model model) {
-		Deed updatedDbDeed = deedDao.updateDeed(deedWithUpdates.getId(), deedWithUpdates);
-		model.addAttribute("updatedDeed", updatedDbDeed); //TODO We dont' necessarily need a dedicated JSP for updated Deed, could send user back to deed listing where they started.
+	public String runDeedUpdate(int deedId, String description, String title, int subcategory, int provider, Model model) {
+		Deed deedWithUpdates = new Deed();
+		deedWithUpdates.setDescription(description);
+		deedWithUpdates.setTitle(title);
+		deedWithUpdates.setProvider(userDao.findUserById(provider));
+		deedWithUpdates.setSubcategory(subcategoryDao.findSubcategoryById(subcategory));
+		
+		
+		Deed updatedDbDeed = deedDao.updateDeed(deedId, deedWithUpdates);
+		model.addAttribute("deed", updatedDbDeed); //TODO We dont' necessarily need a dedicated JSP for updated Deed, could send user back to deed listing where they started.
 		return "deedView"; // TODO need name of actual JSP
+	}
+	
+	@RequestMapping(path = "requestDeedRemove")
+	public String requestDeedDestroy(int deedId) {
+		deedDao.destroyDeed(deedId); //TODO 
+		
+		return "deedDestroyed";
 	}
 
 }
