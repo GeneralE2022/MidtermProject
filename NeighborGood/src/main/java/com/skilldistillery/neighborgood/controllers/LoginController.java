@@ -49,10 +49,16 @@ public class LoginController {
 			session.setAttribute("loggedInUser", user);
 			session.setAttribute("loggedInUserContact", contactDao.findById(user.getId()));
 			session.setAttribute("loginTime", LocalDateTime.now());
-			return "account"; // TODO this was a redirect...how do we set that up?
+			return "redirect:accountRedirect.do"; // TODO this was a redirect...how do we set that up?
 		} else {
 			return "index";
 		}
+	}
+	
+	@RequestMapping(path = "accountRedirect.do")
+	public String redirectAccount() {
+		
+		return "account";
 	}
 
 //	logout.do removes the user from session and redirects to index.do.
