@@ -62,5 +62,4 @@ public class UserController {
 //	public String destroy(int id) {
 //		boolean 
 //	}
-
 }
