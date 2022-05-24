@@ -8,6 +8,8 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
 import com.skilldistillery.neighborgood.entities.User;
@@ -16,11 +18,14 @@ import com.skilldistillery.neighborgood.entities.User;
 @Service
 public class UserDAOImpl implements UserDAO {
 
+	@Lazy
+	@Autowired
+	private UserDAO userDao;
+
 	@PersistenceContext
 	private EntityManager em;
 
 	private Map<Integer, User> users;
-	
 
 	@Override
 	public User createNewUser(User newUser) {
@@ -30,7 +35,7 @@ public class UserDAOImpl implements UserDAO {
 	}
 
 	@Override
-	public User updateUser (int id, User user) {
+	public User updateUser(int id, User user) {
 		User dbUser = em.find(User.class, id);
 		System.out.println(dbUser);
 
@@ -41,25 +46,6 @@ public class UserDAOImpl implements UserDAO {
 			dbUser.setPassword(user.getPassword());
 		}
 		return dbUser;
-	}
-	
-
-	@Override
-	public boolean destroy(int id) {
-
-		boolean destroyed = false;
-
-		User userToRemove = em.find(User.class, id);
-
-		em.remove(userToRemove);
-
-		if (userToRemove == null) {
-			destroyed = !em.contains(userToRemove);
-			System.out.println("Remove success");
-		}
-
-		return destroyed;
-
 	}
 
 	@Override
@@ -73,9 +59,7 @@ public class UserDAOImpl implements UserDAO {
 		User u = null;
 		String jpql = "SELECT u FROM User u WHERE u.username = :un AND u.password = :up";
 		users = new LinkedHashMap<>();
-		User loginUser = em.createQuery(jpql, User.class)
-				.setParameter("un", username)
-				.setParameter("up", password)
+		User loginUser = em.createQuery(jpql, User.class).setParameter("un", username).setParameter("up", password)
 				.getSingleResult();
 		users.put(loginUser.getId(), loginUser);
 		Set<Integer> keys = users.keySet();
@@ -91,8 +75,12 @@ public class UserDAOImpl implements UserDAO {
 	}
 
 	@Override
-	public User deleteUser() {
-		// TODO Auto-generated method stub
-		return null;
+	public boolean deactivateUser(int id) {
+		User user = userDao.findUserById(id);
+		user.setActive(0);
+		boolean deactivated = user.getActive()==0;
+		
+		return deactivated;
 	}
+
 }
