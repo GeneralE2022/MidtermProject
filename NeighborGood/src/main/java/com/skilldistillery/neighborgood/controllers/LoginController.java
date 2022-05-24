@@ -47,8 +47,8 @@ public class LoginController {
 		System.out.println(user != null);
 		if (user != null) {
 			session.setAttribute("loggedInUser", user);
-			session.setAttribute("loginTime", LocalDateTime.now());
 			session.setAttribute("loggedInUserContact", contactDao.findById(user.getId()));
+			session.setAttribute("loginTime", LocalDateTime.now());
 			return "account"; // TODO this was a redirect...how do we set that up?
 		} else {
 			return "index";

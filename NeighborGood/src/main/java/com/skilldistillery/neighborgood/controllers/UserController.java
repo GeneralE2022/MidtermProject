@@ -23,7 +23,7 @@ public class UserController {
 
 	@RequestMapping(path = { "/", "home.do" })
 	public String home(Model model) {
-		model.addAttribute("DEBUG", userDao.findById(1));
+		model.addAttribute("DEBUG", userDao.findUserById(1));
 
 		return "index";
 	}
@@ -54,9 +54,14 @@ public class UserController {
 		m.addAttribute("updateUser", updateUser); 
 		System.out.println(updateUser);
 		m.addAttribute("updateContact", updateContact); 
-		System.out.println(updateContact);
+//		System.out.println(updateContact.toString());
 		
 		return "profileUpdateSuccess";
+	}
+	
+	@RequestMapping(path = "account.do")
+	public String goToAccount() {
+		return "account";
 	}
 
 //	public String destroy(int id) {
