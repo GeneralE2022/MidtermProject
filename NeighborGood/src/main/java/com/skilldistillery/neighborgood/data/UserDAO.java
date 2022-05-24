@@ -6,8 +6,8 @@ public interface UserDAO {
 	
 	public User createNewUser(User newUser);
 	public User updateUser(int id, User user);
-	public User deleteUser();
-	public boolean destroy(int id);
+	
+	public boolean deactivateUser(int id);
 	public User findUserById(int i);
 	public User getUserByUserNameAndPassword(String username, String password);
 	
