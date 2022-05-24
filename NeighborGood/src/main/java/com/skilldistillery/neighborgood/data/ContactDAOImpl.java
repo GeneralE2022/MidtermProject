@@ -1,36 +1,33 @@
 package com.skilldistillery.neighborgood.data;
 
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
+import javax.persistence.PersistenceContext;
+import javax.transaction.Transactional;
+
+import org.springframework.stereotype.Service;
 
 import com.skilldistillery.neighborgood.entities.Contact;
 
+@Transactional
+@Service
 public class ContactDAOImpl implements ContactDAO {
 
+	@PersistenceContext
+	private EntityManager em;
+
 	@Override
-	public Contact create(Contact contact) {
-		EntityManagerFactory emf = Persistence.createEntityManagerFactory("JPANeighborGood");
-		EntityManager em = emf.createEntityManager();
-		em.getTransaction().begin();
+	public Contact createNewContact(Contact contact) {
 		em.persist(contact);
 		em.flush();
-		em.getTransaction().commit();
-		em.clear();
-		em.close();
-		emf.close();
 		return contact;
 	}
 
 	@Override
-	public Contact update(int id, Contact contact) {
-		EntityManagerFactory emf = Persistence.createEntityManagerFactory("JPANeighborGood");
-		EntityManager em = emf.createEntityManager();
+	public Contact updateContact(int id, Contact contact) {
 
 		Contact dbContact = em.find(Contact.class, id);
 
 		if (dbContact != null) {
-			em.getTransaction().begin();
 			dbContact.setStreet(contact.getStreet());
 			dbContact.setCity(contact.getCity());
 			dbContact.setState(contact.getState());
@@ -38,24 +35,17 @@ public class ContactDAOImpl implements ContactDAO {
 			dbContact.setPhone2(contact.getPhone2());
 			dbContact.setEmail(contact.getEmail());
 			dbContact.setZipCode(contact.getZipCode());
-			em.getTransaction().commit();
 		}
-		
-		em.clear();
-		em.close();
-		emf.close();
+
 		return dbContact;
 	}
 
 	@Override
 	public boolean destroy(int id) {
-		EntityManagerFactory emf = Persistence.createEntityManagerFactory("JPANeighborGood");
-		EntityManager em = emf.createEntityManager();
 
 		boolean destroyed = false;
 
 		Contact contactToRemove = em.find(Contact.class, id);
-		em.getTransaction().begin();
 
 		em.remove(contactToRemove);
 
@@ -64,12 +54,12 @@ public class ContactDAOImpl implements ContactDAO {
 			System.out.println("Remove success");
 		}
 
-		em.getTransaction().commit();
-
-		em.clear();
-		em.close();
-		emf.close();
 		return destroyed;
 
+	}
+
+	public Contact findById(int id) {
+		Contact contact = em.find(Contact.class, id);
+		return contact;
 	}
 }

@@ -4,8 +4,8 @@ import com.skilldistillery.neighborgood.entities.Contact;
 
 public interface ContactDAO {
 	
-	public Contact create(Contact contact);
-	public Contact update(int id, Contact contact);
+	public Contact createNewContact(Contact contact);
+	public Contact updateContact(int id, Contact contact);
 	public boolean destroy(int id);
-
+	public Contact findById(int id);
 }

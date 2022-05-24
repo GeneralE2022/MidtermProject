@@ -1,5 +1,9 @@
 package com.skilldistillery.neighborgood.data;
 
+import java.util.LinkedHashMap;
+import java.util.Map;
+import java.util.Set;
+
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
@@ -8,23 +12,87 @@ import org.springframework.stereotype.Service;
 
 import com.skilldistillery.neighborgood.entities.User;
 
-@Service
 @Transactional
+@Service
 public class UserDAOImpl implements UserDAO {
 
 	@PersistenceContext
 	private EntityManager em;
 
+	private Map<Integer, User> users;
+	
+
 	@Override
-	public User findById(int userId) {
-		
-		return em.find(User.class, userId);
+	public User createNewUser(User newUser) {
+		em.persist(newUser);
+		em.flush();
+		return newUser;
 	}
 
 	@Override
-	public User findByUsernameAndPassword(String username, String password) {
-		
+	public User updateUser (int id, User user) {
+		User dbUser = em.find(User.class, id);
+		System.out.println(dbUser);
+
+		if (dbUser != null) {
+			dbUser.setFirstName(user.getFirstName());
+			dbUser.setLastName(user.getLastName());
+			dbUser.setUsername(user.getUsername());
+			dbUser.setPassword(user.getPassword());
+		}
+		return dbUser;
+	}
+	
+
+	@Override
+	public boolean destroy(int id) {
+
+		boolean destroyed = false;
+
+		User userToRemove = em.find(User.class, id);
+
+		em.remove(userToRemove);
+
+		if (userToRemove == null) {
+			destroyed = !em.contains(userToRemove);
+			System.out.println("Remove success");
+		}
+
+		return destroyed;
+
+	}
+
+	@Override
+	public User findUserById(int id) {
+		User user = em.find(User.class, id);
+		return user;
+	}
+
+	@Override
+	public User getUserByUserNameAndPassword(String username, String password) {
+		User u = null;
+		String jpql = "SELECT u FROM User u WHERE u.username = :un AND u.password = :up";
+		users = new LinkedHashMap<>();
+		User loginUser = em.createQuery(jpql, User.class)
+				.setParameter("un", username)
+				.setParameter("up", password)
+				.getSingleResult();
+		users.put(loginUser.getId(), loginUser);
+		Set<Integer> keys = users.keySet();
+		for (Integer key : keys) {
+			User user = users.get(key);
+			System.out.println(user.toString());
+			if (user.getUsername().equals(username) && user.getPassword().equals(password)) {
+				u = user;
+				break;
+			}
+		}
+		return u;
+	}
+
+	@Override
+	public User deleteUser() {
+		// TODO Auto-generated method stub
 		return null;
 	}
-
 }

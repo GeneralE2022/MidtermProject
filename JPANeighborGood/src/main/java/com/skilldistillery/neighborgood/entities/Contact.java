@@ -31,6 +31,9 @@ public class Contact {
 	@Column(name = "zip_code")
 	private String zipCode;
 
+//	@Column(name = "user_id")
+//	private int userId;
+
 	@OneToOne
 	@JoinColumn(name = "user_id")
 	private User user;
@@ -103,6 +106,14 @@ public class Contact {
 		this.zipCode = zipCode;
 	}
 
+//	public int getUserId() {
+//		return userId;
+//	}
+//
+//	public void setUserId(int userId) {
+//		this.userId = userId;
+//	}
+
 	public User getUser() {
 		return user;
 	}
@@ -111,10 +122,6 @@ public class Contact {
 		this.user = user;
 	}
 
-	@Override
-	public String toString() {
-		return "Contact [id=" + id + ", phone=" + phone + ", email=" + email + ", phone2=" + phone2 + ", street="
-				+ street + ", city=" + city + ", state=" + state + ", zipCode=" + zipCode + ", user=" + user + "]";
-	}
+
 
 }
