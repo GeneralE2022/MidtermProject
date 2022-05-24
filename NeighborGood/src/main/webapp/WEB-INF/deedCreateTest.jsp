@@ -22,10 +22,15 @@
 		<input type="hidden" name="provider" size="3" value="${sessionScope.loggedInUser.id}" readonly/> <br> 
 	<label for="subcategory"> <strong>Subcategory:</strong></label> <br>
 		<select name="subcategory" id="subcategory-dropdown">
-			<option value="21">Weeding</option>
-			<option value="22">Raking</option>
-			<option value="23">Mowing</option>
-			<option value="24">Gardening</option>
+			
+			<option>Home Improvement</option>
+			<option>Yardwork</option>
+			<option>Yardwork</option>
+			<option>Yardwork</option>
+			<option value="21"> - Weeding</option>
+			<option value="22"> - Raking</option>
+			<option value="23"> - Mowing</option>
+			<option value="24"> - Gardening</option>
 		</select>
 	
 	<input type="submit" value="Create Deed" />
