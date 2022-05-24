@@ -23,17 +23,28 @@
 	<label for="subcategory"> <strong>Subcategory:</strong></label> <br>
 		<select name="subcategory" id="subcategory-dropdown">
 			
-			<option>Home Improvement</option>
-			<option>Yardwork</option>
-			<option>Yardwork</option>
-			<option>Yardwork</option>
+			<option disabled selected>Choose subcategory</option>
+			<optgroup label="Home Improvement">
+			<option value="11"> - Plumbing</option>
+			<option value="12"> - Electric</option>
+			<option value="13"> - Window & Door</option>
+			<option value="14"> - Cleaning</option></optgroup>
+			<optgroup label="Yardwork">
 			<option value="21"> - Weeding</option>
 			<option value="22"> - Raking</option>
 			<option value="23"> - Mowing</option>
-			<option value="24"> - Gardening</option>
+			<option value="24"> - Gardening</option></optgroup>
+			<optgroup label="Repair / Maintenance">
+			<option value="31"> - Automotive</option>
+			<option value="32"> - Appliance</option>
+			<option value="33"> - Computer</option></optgroup>
+			<optgroup label="Petcare">
+			<option value="41"> - Walking</option>
+			<option value="42"> - Sitting</option>
+			<option value="43"> - Grooming</option></optgroup>
 		</select>
 	
-	<input type="submit" value="Create Deed" />
+	<input type="submit" value="Create Deed Offering" />
 	
 		</div>
 		
