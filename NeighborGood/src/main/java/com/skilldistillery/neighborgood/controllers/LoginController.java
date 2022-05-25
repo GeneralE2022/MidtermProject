@@ -64,8 +64,6 @@ public class LoginController {
 				session.setAttribute("loggedInUser", user);
 				session.setAttribute("loggedInUserId", user.getId());
 				session.setAttribute("loggedInUserContact", contactDao.findById(user.getId()));
-				session.setAttribute("loggedInUserDeeds", deeds);
-				session.setAttribute("loggedInUserDeedsReceived", deedsR);
 				session.setAttribute("loginTime", LocalDateTime.now());
 				return "redirect:accountRedirect.do";
 			}
@@ -75,8 +73,12 @@ public class LoginController {
 	}
 
 	@RequestMapping(path = "accountRedirect.do")
-	public String redirectAccount() {
-
+	public String redirectAccount(HttpSession session, Model m) {
+		Integer id = (Integer)session.getAttribute("loggedInUserId");
+		List<Deed> deeds = deedDao.findDeedsByProviderId(id); 
+		List<Deed> deedsR = deedDao.findDeedsByRecipientId(id); 
+		m.addAttribute("deeds", deeds); 
+		m.addAttribute("deedsR", deedsR); 
 		return "account";
 	}
 

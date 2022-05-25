@@ -74,7 +74,9 @@ public class UserController {
 	public String goToAccount(Model model, HttpSession session) {
 		Integer id = (Integer) session.getAttribute("loggedInUserId"); 
 		List<Deed> deeds = deedDao.findDeedsByProviderId(id); 
+		List<Deed> deedsR = deedDao.findDeedsByRecipientId(id); 
 		model.addAttribute("deeds", deeds); 
+		model.addAttribute("deedsR", deedsR); 
 		return "account";
 	}
 	

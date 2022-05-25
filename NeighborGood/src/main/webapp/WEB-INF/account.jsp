@@ -199,7 +199,7 @@
 			
 			<div><!-- List of user's deeds -->
 			<h2>Your Deeds</h2>
-			<c:forEach var="deed" items="${sessionScope.loggedInUserDeeds}">
+			<c:forEach var="deed" items="${deeds}">
 					<div class="row">
 						<h4>
 							<a href="deedView.do?deedId=${deed.id}">${deed.title}</a>
@@ -207,7 +207,7 @@
 					</div>
 				</c:forEach>
 			<h2>Deeds Received</h2>
-			<c:forEach var="deed" items="${sessionScope.loggedInUserDeedsReceived}">
+			<c:forEach var="deed" items="${deedsR}">
 					<div class="row">
 						<h4>
 							<a href="deedView.do?deedId=${deed.id}">${deed.title}</a>

@@ -10,6 +10,7 @@ import javax.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
 import com.skilldistillery.neighborgood.entities.Deed;
+import com.skilldistillery.neighborgood.entities.DeedTransaction;
 
 @Transactional
 @Service
@@ -43,10 +44,18 @@ public class DeedDAOImpl implements DeedDAO {
 	public boolean destroyDeed(int id) {
 
 		boolean destroyed = false;
+		boolean dtDestroyed = false;
+
+		DeedTransaction dtToRemove = em.find(DeedTransaction.class, id);
 
 		Deed deedToRemove = em.find(Deed.class, id);
-
-		em.remove(deedToRemove);
+		em.remove(dtToRemove);
+		if (dtToRemove != null) {
+			dtDestroyed = !em.contains(dtToRemove);
+			if (dtDestroyed) {
+				em.remove(deedToRemove);
+			}
+		}
 
 		if (deedToRemove != null) {
 			destroyed = !em.contains(deedToRemove);
@@ -66,7 +75,7 @@ public class DeedDAOImpl implements DeedDAO {
 	public List<Deed> findAllDeeds() {
 		String jpql = "SELECT d FROM Deed d";
 		List<Deed> deeds;
-		deeds = em.createQuery(jpql, Deed.class).getResultList(); 
+		deeds = em.createQuery(jpql, Deed.class).getResultList();
 		return deeds;
 	}
 
@@ -74,16 +83,16 @@ public class DeedDAOImpl implements DeedDAO {
 	public List<Deed> findDeedsByProviderId(int id) {
 		String jpql = "SELECT d FROM Deed d WHERE d.provider = " + id;
 		List<Deed> deeds;
-		deeds = em.createQuery(jpql, Deed.class).getResultList(); 
+		deeds = em.createQuery(jpql, Deed.class).getResultList();
 		return deeds;
 	}
 
 	@Override
 	public List<Deed> findDeedsByRecipientId(int id) {
 		String jpql = "SELECT d FROM Deed d JOIN DeedTransaction t ON t.deed = d.id "
-				+ 	  "JOIN User u ON u.id = t.recipient WHERE u.id = " + id;
+				+ "JOIN User u ON u.id = t.recipient WHERE u.id = " + id;
 		List<Deed> deeds;
-		deeds = em.createQuery(jpql, Deed.class).getResultList(); 
+		deeds = em.createQuery(jpql, Deed.class).getResultList();
 		return deeds;
 	}
 }
