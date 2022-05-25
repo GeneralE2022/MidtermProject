@@ -122,9 +122,9 @@ ENGINE = InnoDB;
 DROP TABLE IF EXISTS `deed_transaction` ;
 
 CREATE TABLE IF NOT EXISTS `deed_transaction` (
-  `id` INT NOT NULL,
+  `id` INT NOT NULL AUTO_INCREMENT,
   `deed_id` INT NOT NULL,
-  `recipient_id` INT NOT NULL,
+  `recipient_id` INT NULL,
   `provided_date` DATE NULL,
   PRIMARY KEY (`id`),
   INDEX `fk_deed_transaction_deed1_idx` (`deed_id` ASC),

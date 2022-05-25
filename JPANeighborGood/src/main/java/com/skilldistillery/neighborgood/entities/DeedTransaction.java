@@ -42,8 +42,8 @@ public class DeedTransaction {
 		this.id = id;
 	}
 
-	public Deed getDeedId() {
-		return deed;
+	public int getDeedId() {
+		return deed.getId();
 	}
 
 	public void setDeedId(Deed deed) {
