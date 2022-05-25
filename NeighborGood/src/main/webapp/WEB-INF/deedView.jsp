@@ -26,14 +26,17 @@
 							
 							<c:if test="${sessionScope.loggedInUser.id != null }">
 							<li>Offered by: ${deed.provider.username} </li>
-								
+							<li>Claim status: 
+								<c:if test="${empty deedTransaction.recipient}"><strong>unclaimed</strong></c:if>
+								<c:if test="${not empty deedTransaction.recipient}">claimed by <strong>${deedTransaction.recipient.username}</strong></c:if></li>
 								
 								
 							<li>Contact: <c:if test="${deed.provider.active == 1 }">${deed.provider.contact.phone}</c:if><c:if test="${deed.provider.active == 0 }">
 								(Provider currently not offering services.)</c:if></li>
 								</c:if>
 								
-							
+												
+
 						</ul>
 											
 						
