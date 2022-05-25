@@ -23,6 +23,7 @@ public class DeedDAOImpl implements DeedDAO {
 	public Deed createNewDeed(Deed deed) {
 		em.persist(deed);
 		em.flush();
+		
 		return deed;
 	}
 

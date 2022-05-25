@@ -9,9 +9,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.skilldistillery.neighborgood.data.DeedDAO;
+import com.skilldistillery.neighborgood.data.DeedTransactionDAO;
 import com.skilldistillery.neighborgood.data.SubcategoryDAO;
 import com.skilldistillery.neighborgood.data.UserDAO;
 import com.skilldistillery.neighborgood.entities.Deed;
+import com.skilldistillery.neighborgood.entities.DeedTransaction;
 
 @Controller
 public class DeedController {
@@ -28,6 +30,10 @@ public class DeedController {
 	@Autowired
 	private UserDAO userDao;
 	
+	@Lazy
+	@Autowired
+	private DeedTransactionDAO dtDao;
+	
 	@RequestMapping(path = "requestCreateDeed.do")
 	public String requestCreateDeed() {
 		
@@ -36,12 +42,17 @@ public class DeedController {
 	
 	@RequestMapping(path = "deedView.do")
 	public String viewDeed(Model m, int deedId) {
-		m.addAttribute("deed", deedDao.findDeedById(deedId)); 
+		Deed deed = deedDao.findDeedById(deedId);
+		DeedTransaction dt = dtDao.findDeedTransactionByDeedId(deedId);
+		m.addAttribute("deed", deed);
+		m.addAttribute("deedTransaction", dt);
+		
 		return "deedView";
 	}
 
 	@RequestMapping(path = "createDeed.do")
 	public String createNewDeed(String title, String description, int subcategory, int provider, Model model, HttpSession session) {
+		DeedTransaction newDt = new DeedTransaction();
 		boolean newDeedCreated = false;
 		/* 
 		 * Subcategory_id can be pulled from the page by giving the user a subcat menu. 
@@ -56,6 +67,10 @@ public class DeedController {
 		session.setAttribute("sessionProviderId", session);
 		Deed newDeed = deedDao.createNewDeed(deed);
 		newDeedCreated = newDeed != null;
+		if (newDeedCreated) {
+			newDt = dtDao.createDeedTransaction(newDeed);
+		}
+		model.addAttribute("deedTransaction", newDt);
 		model.addAttribute("deed", newDeed);
 		model.addAttribute("newDeedCreated", newDeedCreated);
 		return "deedView";
