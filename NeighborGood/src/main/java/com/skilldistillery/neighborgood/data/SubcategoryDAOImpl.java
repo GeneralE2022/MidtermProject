@@ -1,12 +1,14 @@
 package com.skilldistillery.neighborgood.data;
 
+import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Service;
 
-import com.skilldistillery.neighborgood.entities.Contact;
+import com.skilldistillery.neighborgood.entities.Deed;
 import com.skilldistillery.neighborgood.entities.Subcategory;
 
 @Transactional
@@ -16,7 +18,13 @@ public class SubcategoryDAOImpl implements SubcategoryDAO {
 	@PersistenceContext
 	private EntityManager em;
 
-	
+	@Override
+	public List<Subcategory> findAllSubcategories() {
+		String jpql = "SELECT s FROM Subcategory s";
+		List<Subcategory> subcategories;
+		subcategories = em.createQuery(jpql, Subcategory.class).getResultList();
+		return subcategories;
+	}
 
 	@Override
 	public Subcategory findSubcategoryById(int id) {

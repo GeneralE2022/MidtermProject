@@ -1,6 +1,5 @@
 package com.skilldistillery.neighborgood.data;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -11,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.skilldistillery.neighborgood.entities.Deed;
 import com.skilldistillery.neighborgood.entities.DeedTransaction;
+import com.skilldistillery.neighborgood.entities.Subcategory;
 
 @Transactional
 @Service
@@ -95,5 +95,12 @@ public class DeedDAOImpl implements DeedDAO {
 		List<Deed> deeds;
 		deeds = em.createQuery(jpql, Deed.class).getResultList();
 		return deeds;
+	}
+
+	@Override
+	public List<Deed> findDeedsBySubcategoryId(int id) {
+		String jpql = "SELECT d FROM Deed d WHERE d.subcategory_id = " + id;
+		List<Deed> deedsInSubcategory = em.createQuery(jpql, Deed.class).getResultList();
+		return deedsInSubcategory;
 	}
 }
