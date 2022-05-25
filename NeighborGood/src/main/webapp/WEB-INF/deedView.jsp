@@ -27,7 +27,7 @@
 						<c:if test="${sessionScope.loggedInUser.id == deed.provider.id}">
 							<a href="requestDeedUpdate.do?deedId=${deed.id}">Modify this
 								deed posting</a>
-							<a href="requestDeedRemove.do?deedId=${deed.id}">Delete this
+							<a href="runDeedDestroy.do?deedId=${deed.id}">Delete this
 								deed posting</a>
 						</c:if>
 					</div>

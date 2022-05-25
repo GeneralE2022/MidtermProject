@@ -14,7 +14,7 @@
 	
 	<c:if test="${deactivated}">
 
-	<h1>Account Successfully Deactivated</h1>
+	<h1>Account Deactivated</h1>
 	
 	</c:if>
 </body>

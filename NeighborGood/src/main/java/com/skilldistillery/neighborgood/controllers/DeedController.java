@@ -43,7 +43,7 @@ public class DeedController {
 	@RequestMapping(path = "createDeed.do")
 	public String createNewDeed(String title, String description, int subcategory, int provider, Model model, HttpSession session) {
 		boolean newDeedCreated = false;
-		/* TODO
+		/* 
 		 * Subcategory_id can be pulled from the page by giving the user a subcat menu. 
 		 * Provider_id I think will need to be pulled directly from the session object,
 		 * since it will contain the active user's id who is creating the Deed.
@@ -80,14 +80,14 @@ public class DeedController {
 		
 		
 		Deed updatedDbDeed = deedDao.updateDeed(deedId, deedWithUpdates);
-		model.addAttribute("deed", updatedDbDeed); //TODO We dont' necessarily need a dedicated JSP for updated Deed, could send user back to deed listing where they started.
-		return "deedView"; // TODO need name of actual JSP
+		model.addAttribute("deed", updatedDbDeed); 
+		return "deedView"; 
 	}
 	
-	@RequestMapping(path = "requestDeedRemove")
-	public String requestDeedDestroy(int deedId) {
-		deedDao.destroyDeed(deedId); //TODO 
-		
+	@RequestMapping(path = "runDeedDestroy.do")
+	public String requestDeedDestroy(int deedId, Model m) {
+		boolean destroyed = deedDao.destroyDeed(deedId);
+		m.addAttribute("destroyed", destroyed);
 		return "deedDestroyed";
 	}
 

@@ -196,6 +196,26 @@
 				</div>
 
 			</div>
+			
+			<div><!-- List of user's deeds -->
+			<h2>Your Deeds</h2>
+			<c:forEach var="deed" items="${sessionScope.loggedInUserDeeds}">
+					<div class="row">
+						<h4>
+							<a href="deedView.do?deedId=${deed.id}">${deed.title}</a>
+						</h4>
+					</div>
+				</c:forEach>
+			<h2>Deeds Received</h2>
+			<c:forEach var="deed" items="${sessionScope.loggedInUserDeedsReceived}">
+					<div class="row">
+						<h4>
+							<a href="deedView.do?deedId=${deed.id}">${deed.title}</a>
+						</h4>
+					</div>
+				</c:forEach>
+			<h2>Deeds Completed</h2>
+			</div>
 
 
 		<h5>Would you like to deactivate your account?</h5>	<br>

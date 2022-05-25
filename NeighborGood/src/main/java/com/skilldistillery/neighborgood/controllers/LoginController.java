@@ -1,6 +1,7 @@
 package com.skilldistillery.neighborgood.controllers;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
@@ -12,7 +13,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.skilldistillery.neighborgood.data.ContactDAOImpl;
+import com.skilldistillery.neighborgood.data.DeedDAOImpl;
 import com.skilldistillery.neighborgood.data.UserDAOImpl;
+import com.skilldistillery.neighborgood.entities.Deed;
 import com.skilldistillery.neighborgood.entities.User;
 
 @Controller
@@ -21,10 +24,14 @@ public class LoginController {
 	@Lazy
 	@Autowired
 	private UserDAOImpl userDao;
-	
+
 	@Lazy
 	@Autowired
 	private ContactDAOImpl contactDao;
+	
+	@Lazy
+	@Autowired
+	private DeedDAOImpl deedDao;
 
 //	GET/POST login.do - If a user is logged in and requests login.do, they should be redirected to index.do.
 //	GET login.do displays the login view.
@@ -47,21 +54,29 @@ public class LoginController {
 			return "redirect:index.do";
 		}
 		user = userDao.getUserByUserNameAndPassword(user.getUsername(), user.getPassword());
-		System.out.println(user != null);
 		if (user != null) {
-			session.setAttribute("loggedInUser", user);
-			session.setAttribute("loggedInUserId", user.getId());
-			session.setAttribute("loggedInUserContact", contactDao.findById(user.getId()));
-			session.setAttribute("loginTime", LocalDateTime.now());
-			return "redirect:accountRedirect.do"; // TODO this was a redirect...how do we set that up?
+			if (user.getActive() != 1) {
+				model.addAttribute("deactivated", true);
+				return "accountDeactivated";
+			} else {
+				List<Deed> deeds = deedDao.findDeedsByProviderId(user.getId());
+				List<Deed> deedsR = deedDao.findDeedsByRecipientId(user.getId());
+				session.setAttribute("loggedInUser", user);
+				session.setAttribute("loggedInUserId", user.getId());
+				session.setAttribute("loggedInUserContact", contactDao.findById(user.getId()));
+				session.setAttribute("loggedInUserDeeds", deeds);
+				session.setAttribute("loggedInUserDeedsReceived", deedsR);
+				session.setAttribute("loginTime", LocalDateTime.now());
+				return "redirect:accountRedirect.do";
+			}
 		} else {
 			return "index";
 		}
 	}
-	
+
 	@RequestMapping(path = "accountRedirect.do")
 	public String redirectAccount() {
-		
+
 		return "account";
 	}
 

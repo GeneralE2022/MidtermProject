@@ -48,7 +48,7 @@ public class DeedDAOImpl implements DeedDAO {
 
 		em.remove(deedToRemove);
 
-		if (deedToRemove == null) {
+		if (deedToRemove != null) {
 			destroyed = !em.contains(deedToRemove);
 			System.out.println("Remove success");
 		}
@@ -71,8 +71,17 @@ public class DeedDAOImpl implements DeedDAO {
 	}
 
 	@Override
-	public List<Deed> findDeedsByUserId(int id) {
-		String jpql = "SELECT d FROM Deed d WHERE d = " + id;
+	public List<Deed> findDeedsByProviderId(int id) {
+		String jpql = "SELECT d FROM Deed d WHERE d.provider = " + id;
+		List<Deed> deeds;
+		deeds = em.createQuery(jpql, Deed.class).getResultList(); 
+		return deeds;
+	}
+
+	@Override
+	public List<Deed> findDeedsByRecipientId(int id) {
+		String jpql = "SELECT d FROM Deed d JOIN DeedTransaction t ON t.deed = d.id "
+				+ 	  "JOIN User u ON u.id = t.recipient WHERE u.id = " + id;
 		List<Deed> deeds;
 		deeds = em.createQuery(jpql, Deed.class).getResultList(); 
 		return deeds;

@@ -10,8 +10,10 @@ public interface DeedDAO {
 
 	public List<Deed> findAllDeeds();
 
-	public List<Deed> findDeedsByUserId(int id);
+	public List<Deed> findDeedsByProviderId(int id);
 
+	public List<Deed> findDeedsByRecipientId(int id);
+	
 	public Deed createNewDeed(Deed deed);
 
 	public Deed updateDeed(int id, Deed deed);

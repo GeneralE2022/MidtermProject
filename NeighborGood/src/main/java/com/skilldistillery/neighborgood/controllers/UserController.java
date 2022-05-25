@@ -73,16 +73,28 @@ public class UserController {
 	@RequestMapping(path = "account.do")
 	public String goToAccount(Model model, HttpSession session) {
 		Integer id = (Integer) session.getAttribute("loggedInUserId"); 
-		List<Deed> deeds = deedDao.findDeedsByUserId(id); 
+		List<Deed> deeds = deedDao.findDeedsByProviderId(id); 
 		model.addAttribute("deeds", deeds); 
 		return "account";
 	}
 	
 	@RequestMapping(path = "deactivateAccount.do")
-	public String deactviateUser(int deactivateId, Model m) {
+	public String deactviateUser(int deactivateId, Model m, HttpSession session) {
 		
 		boolean deactivated = userDao.deactivateUser(deactivateId);
+		if (deactivated) {
+			session.removeAttribute("loggedInUser");
+			session.removeAttribute("loggedInUserId");
+			session.removeAttribute("loggedInUserContact");
+			session.removeAttribute("loginTime");
+//			session.invalidate(); //TODO maybe good for "back button" problem
+		}
 		m.addAttribute("deactivated", deactivated);
+		return "redirect:accountDeactivated.do";
+	}
+	
+	@RequestMapping(path ="accountDeactivated.do")
+	public String deactivateRedirect() {
 		return "accountDeactivated";
 	}
 
