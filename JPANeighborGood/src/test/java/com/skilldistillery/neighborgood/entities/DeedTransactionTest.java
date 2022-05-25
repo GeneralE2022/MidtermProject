@@ -36,7 +36,7 @@ class DeedTransactionTest {
 	@BeforeEach
 	void setUp() throws Exception {
 		em = emf.createEntityManager();
-		dt = em.find(DeedTransaction.class, 1);
+		dt = em.find(DeedTransaction.class, 10);
 	}
 
 	@AfterEach
@@ -49,13 +49,13 @@ class DeedTransactionTest {
 	void test_field_mappings() {
 		assertNotNull(dt);
 		assertEquals(2022, dt.getProvidedDate().getYear());
-		assertEquals(Month.MAY, dt.getProvidedDate().getMonth());
+		assertEquals(Month.APRIL, dt.getProvidedDate().getMonth());
 	}
 	
 	@Test
 	void test_deed_mappings() {
 		assertNotNull(dt);
-		assertEquals(1, dt.getDeedId().getId());
+		assertEquals(10, dt.getDeedId().getId());
 	}
 	
 	@Test
