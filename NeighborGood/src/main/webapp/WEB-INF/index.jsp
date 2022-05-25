@@ -60,36 +60,146 @@
 
 	<div class="container-lg">
 
-		<div class="row">
-			<div class="col">
-				<h3>Yardwork</h3>
-			</div>
-			<div class="col">
-				<h3>Home Improvement</h3>
-			</div>
-			<div class="col">
-				<h3>Pet Care</h3>
-			</div>
-			<div class="col">
-				<h3>Repair/Maintenance</h3>
-			</div>
-
-			<div class="row">
-
+			<div class="row row-cols-4">
+			
+		  	<div class="col">
+		  	<h3>Home improvement</h3><br>
+		  	
 				<c:forEach var="deed" items="${deeds}">
 					<div class="row">
-						<h4>
-							<a href="deedView.do?deedId=${deed.id }">${deed.title}</a>
-						</h4>
+					<c:if test="${deed.subcategory.id == 11}">
+						<h5>
+							${deed.subcategory.title }: <a href="deedView.do?deedId=${deed.id }">${deed.title}</a>
+						</h5>
+					</c:if>
+					
+					<c:if test="${deed.subcategory.id == 12}">
+						<h5>
+							${deed.subcategory.title }: <a href="deedView.do?deedId=${deed.id }">${deed.title}</a>
+						</h5>
+					</c:if>
+					
+					<c:if test="${deed.subcategory.id == 13}">
+						<h5>
+							${deed.subcategory.title }: <a href="deedView.do?deedId=${deed.id }">${deed.title}</a>
+						</h5>
+					</c:if>
+					
+					<c:if test="${deed.subcategory.id == 14}">
+						<h5>
+							${deed.subcategory.title }: <a href="deedView.do?deedId=${deed.id }">${deed.title}</a>
+						</h5>
+					</c:if>
 					</div>
 				</c:forEach>
-
+			</div>
+				
+			<div class="col">
+		  	<h3>Yard work</h3><br>
+		  	
+				<c:forEach var="deed" items="${deeds}">
+					<div class="row">
+					<c:if test="${deed.subcategory.id == 21}">
+						<h5>
+							${deed.subcategory.title }: <a href="deedView.do?deedId=${deed.id }">${deed.title}</a>
+						</h5>
+					</c:if>
+					
+					<c:if test="${deed.subcategory.id == 22}">
+						<h5>
+							${deed.subcategory.title }: <a href="deedView.do?deedId=${deed.id }">${deed.title}</a>
+						</h5>
+					</c:if>
+					
+					<c:if test="${deed.subcategory.id == 23}">
+						<h5>
+							${deed.subcategory.title }: <a href="deedView.do?deedId=${deed.id }">${deed.title}</a>
+						</h5>
+					</c:if>
+					
+					<c:if test="${deed.subcategory.id == 24}">
+						<h5>
+							${deed.subcategory.title }: <a href="deedView.do?deedId=${deed.id }">${deed.title}</a>
+						</h5>
+					</c:if>
+					
+					<c:if test="${deed.subcategory.id == 25}">
+						<h5>
+							${deed.subcategory.title }: <a href="deedView.do?deedId=${deed.id }">${deed.title}</a>
+						</h5>
+					</c:if>
+					</div>
+				</c:forEach>
+			</div>
+			
+			<div class="col">
+		  	<h3>Maintenance / Repair</h3><br>
+		  	
+				<c:forEach var="deed" items="${deeds}">
+					<div class="row">
+					<c:if test="${deed.subcategory.id == 31}">
+						<h5>
+							${deed.subcategory.title }: <a href="deedView.do?deedId=${deed.id }">${deed.title}</a>
+						</h5>
+					</c:if>
+					
+					<c:if test="${deed.subcategory.id == 32}">
+						<h5>
+							${deed.subcategory.title }: <a href="deedView.do?deedId=${deed.id }">${deed.title}</a>
+						</h5>
+					</c:if>
+					
+					<c:if test="${deed.subcategory.id == 33}">
+						<h5>
+							${deed.subcategory.title }: <a href="deedView.do?deedId=${deed.id }">${deed.title}</a>
+						</h5>
+					</c:if>
+					
+					</div>
+				</c:forEach>
+			</div>
+				
+			<div class="col">
+		  	<h3>Pet Care</h3><br>
+		  	
+				<c:forEach var="deed" items="${deeds}">
+					<div class="row">
+					<c:if test="${deed.subcategory.id == 41}">
+						<h5>
+							${deed.subcategory.title }: <a href="deedView.do?deedId=${deed.id }">${deed.title}</a>
+						</h5>
+					</c:if>
+					
+					<c:if test="${deed.subcategory.id == 42}">
+						<h5>
+							${deed.subcategory.title }: <a href="deedView.do?deedId=${deed.id }">${deed.title}</a>
+						</h5>
+					</c:if>
+					
+					<c:if test="${deed.subcategory.id == 43}">
+						<h5>
+							${deed.subcategory.title }: <a href="deedView.do?deedId=${deed.id }">${deed.title}</a>
+						</h5>
+					</c:if>
+					
+					</div>
+				</c:forEach>
+			</div>
+				
+				
+				
+				
+				
 			</div>
 		</div>
-	</div>
 </body>
 <footer>
 	<p style="text-align: center;">All Rights Reserved Dismal Justice
 		2022</p>
 </footer>
 </html>
+
+
+
+
+

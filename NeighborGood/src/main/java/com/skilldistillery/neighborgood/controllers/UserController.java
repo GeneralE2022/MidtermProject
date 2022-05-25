@@ -12,9 +12,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.skilldistillery.neighborgood.data.ContactDAO;
 import com.skilldistillery.neighborgood.data.DeedDAO;
+import com.skilldistillery.neighborgood.data.SubcategoryDAO;
 import com.skilldistillery.neighborgood.data.UserDAO;
 import com.skilldistillery.neighborgood.entities.Contact;
 import com.skilldistillery.neighborgood.entities.Deed;
+import com.skilldistillery.neighborgood.entities.Subcategory;
 import com.skilldistillery.neighborgood.entities.User;
 
 @Controller
@@ -27,15 +29,28 @@ public class UserController {
 	@Lazy
 	@Autowired
 	private ContactDAO contactDao;
-	
+
 	@Lazy
 	@Autowired
 	private DeedDAO deedDao;
 
+	@Lazy
+	@Autowired
+	private SubcategoryDAO subcategoryDao;
+
 	@RequestMapping(path = { "/", "home.do" })
 	public String home(Model model) {
-		List<Deed> deeds = deedDao.findAllDeeds(); 
-		model.addAttribute("deeds", deeds); 
+		
+		List<Subcategory> subcategories = subcategoryDao.findAllSubcategories();
+		model.addAttribute("subcategories", subcategories);
+		
+//		List<Deed> plumbingDeeds = (deedDao.findDeedsBySubcategoryId(11));
+//		model.addAttribute("plumbingDeeds", plumbingDeeds);
+//		System.out.println(plumbingDeeds.toString());
+		
+		List<Deed> deeds = deedDao.findAllDeeds();
+		model.addAttribute("deeds", deeds);
+
 		return "index";
 	}
 
@@ -58,38 +73,38 @@ public class UserController {
 
 	@RequestMapping(path = "updateProfile.do")
 	public String updateUser(Integer existingId, User user, Contact contact, HttpSession session, Model m) {
-		
-		User updateUser = userDao.updateUser(existingId, user); 
-		Contact updateContact = contactDao.updateContact(updateUser.getContact().getId(), contact); 
 
-		m.addAttribute("updateUser", updateUser); 
-		m.addAttribute("updateContact", updateContact); 
+		User updateUser = userDao.updateUser(existingId, user);
+		Contact updateContact = contactDao.updateContact(updateUser.getContact().getId(), contact);
+
+		m.addAttribute("updateUser", updateUser);
+		m.addAttribute("updateContact", updateContact);
 		session.setAttribute("loggedInUser", userDao.findUserById(existingId));
 		return "redirect:profileUpdateSuccess.do";
 	}
-	
-	@RequestMapping(path ="profileUpdateSuccess.do")
+
+	@RequestMapping(path = "profileUpdateSuccess.do")
 	public String updateProfileRedirect() {
-		
+
 		return "profileUpdateSuccess";
 	}
-	
+
 	@RequestMapping(path = "account.do")
 	public String goToAccount(Model model, HttpSession session) {
-		Integer id = (Integer) session.getAttribute("loggedInUserId"); 
-		Contact contact = contactDao.findContactByUserId(id); 
-		List<Deed> deeds = deedDao.findDeedsByProviderId(id); 
+		Integer id = (Integer) session.getAttribute("loggedInUserId");
+		Contact contact = contactDao.findContactByUserId(id);
+		List<Deed> deeds = deedDao.findDeedsByProviderId(id);
 		List<Deed> deedsR = deedDao.findDeedsByRecipientId(id);
-		
-		model.addAttribute("contact", contact); 
-		model.addAttribute("deeds", deeds); 
-		model.addAttribute("deedsR", deedsR); 
+
+		model.addAttribute("contact", contact);
+		model.addAttribute("deeds", deeds);
+		model.addAttribute("deedsR", deedsR);
 		return "account";
 	}
-	
+
 	@RequestMapping(path = "deactivateAccount.do")
 	public String deactviateUser(int deactivateId, Model m, HttpSession session) {
-		
+
 		boolean deactivated = userDao.deactivateUser(deactivateId);
 		if (deactivated) {
 			session.removeAttribute("loggedInUser");
@@ -101,11 +116,10 @@ public class UserController {
 		m.addAttribute("deactivated", deactivated);
 		return "redirect:accountDeactivated.do";
 	}
-	
-	@RequestMapping(path ="accountDeactivated.do")
+
+	@RequestMapping(path = "accountDeactivated.do")
 	public String deactivateRedirect() {
 		return "accountDeactivated";
 	}
-
 
 }
