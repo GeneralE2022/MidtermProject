@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.skilldistillery.neighborgood.entities.Deed;
 import com.skilldistillery.neighborgood.entities.DeedTransaction;
+import com.skilldistillery.neighborgood.entities.User;
 
 @Transactional
 @Service
@@ -57,6 +58,13 @@ public class DeedTransactionDAOImpl implements DeedTransactionDAO {
 		String jpql = "SELECT t FROM DeedTransaction t WHERE t.deed = " + id;
 		DeedTransaction dt = em.createQuery(jpql, DeedTransaction.class).getSingleResult();
 		return dt;
+	}
+
+	@Override
+	public DeedTransaction claimDeed(Deed deedToClaim, User recipient) {
+		DeedTransaction updatedDeedTransaction = em.find(DeedTransaction.class, deedToClaim.getId());
+		updatedDeedTransaction.setRecipient(recipient);
+		return null;
 	}
 
 }

@@ -103,4 +103,5 @@ public class DeedDAOImpl implements DeedDAO {
 		List<Deed> deedsInSubcategory = em.createQuery(jpql, Deed.class).getResultList();
 		return deedsInSubcategory;
 	}
+
 }

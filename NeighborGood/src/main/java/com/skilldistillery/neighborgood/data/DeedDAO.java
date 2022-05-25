@@ -21,5 +21,5 @@ public interface DeedDAO {
 	public Deed updateDeed(int id, Deed deed);
 
 	public boolean destroyDeed(int id);
-
+	
 }

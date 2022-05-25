@@ -27,7 +27,7 @@
 							<c:if test="${sessionScope.loggedInUser.id != null }">
 							<li>Offered by: ${deed.provider.username} </li>
 							<li>Claim status: 
-								<c:if test="${empty deedTransaction.recipient}"><strong>unclaimed</strong></c:if>
+								<c:if test="${empty deedTransaction.recipient}"><strong>unclaimed</strong><a href="claimDeed.do?deedId=${deed.id}">(claim this deed!)</a></c:if>
 								<c:if test="${not empty deedTransaction.recipient}">claimed by <strong>${deedTransaction.recipient.username}</strong></c:if></li>
 								
 								

@@ -21,41 +21,48 @@ public class DeedController {
 	@Lazy
 	@Autowired
 	private DeedDAO deedDao;
-	
+
 	@Lazy
 	@Autowired
 	private SubcategoryDAO subcategoryDao;
-	
+
 	@Lazy
 	@Autowired
 	private UserDAO userDao;
-	
+
 	@Lazy
 	@Autowired
 	private DeedTransactionDAO dtDao;
-	
+
 	@RequestMapping(path = "requestCreateDeed.do")
 	public String requestCreateDeed() {
-		
+
 		return "deedCreate";
 	}
-	
+
 	@RequestMapping(path = "deedView.do")
-	public String viewDeed(Model m, int deedId) {
+	public String viewDeed(Model m, Integer deedId) {
 		Deed deed = deedDao.findDeedById(deedId);
 		DeedTransaction dt = dtDao.findDeedTransactionByDeedId(deedId);
 		m.addAttribute("deed", deed);
 		m.addAttribute("deedTransaction", dt);
-		
+
+		return "deedView";
+	}
+
+	@RequestMapping(path="deedViewRe.do")
+	public String deedViewRe(Model m) {
+			
 		return "deedView";
 	}
 
 	@RequestMapping(path = "createDeed.do")
-	public String createNewDeed(String title, String description, int subcategory, int provider, Model model, HttpSession session) {
+	public String createNewDeed(String title, String description, int subcategory, int provider, Model model,
+			HttpSession session) {
 		DeedTransaction newDt = new DeedTransaction();
 		boolean newDeedCreated = false;
-		/* 
-		 * Subcategory_id can be pulled from the page by giving the user a subcat menu. 
+		/*
+		 * Subcategory_id can be pulled from the page by giving the user a subcat menu.
 		 * Provider_id I think will need to be pulled directly from the session object,
 		 * since it will contain the active user's id who is creating the Deed.
 		 */
@@ -75,7 +82,7 @@ public class DeedController {
 		model.addAttribute("newDeedCreated", newDeedCreated);
 		return "deedView";
 	}
-	
+
 	@RequestMapping(path = "requestDeedUpdate.do") // When user clicks "update this deed"
 	public String updateDeed(int deedId, Model model) {
 		System.out.println(deedId);
@@ -84,21 +91,22 @@ public class DeedController {
 		model.addAttribute("deedBeingUpdated", deedBeingUpdated);
 		return "deedUpdate"; // User is taken to a dedicated JSP with input forms to change deed details
 	}
-	
-	@RequestMapping(path = "runDeedUpdate.do") // When user clicks "Save Updates" etc after making changes on updatingDeed.jsp
-	public String runDeedUpdate(int deedId, String description, String title, int subcategory, int provider, Model model) {
+
+	@RequestMapping(path = "runDeedUpdate.do") // When user clicks "Save Updates" etc after making changes on
+												// updatingDeed.jsp
+	public String runDeedUpdate(int deedId, String description, String title, int subcategory, int provider,
+			Model model) {
 		Deed deedWithUpdates = new Deed();
 		deedWithUpdates.setDescription(description);
 		deedWithUpdates.setTitle(title);
 		deedWithUpdates.setProvider(userDao.findUserById(provider));
 		deedWithUpdates.setSubcategory(subcategoryDao.findSubcategoryById(subcategory));
-		
-		
+
 		Deed updatedDbDeed = deedDao.updateDeed(deedId, deedWithUpdates);
-		model.addAttribute("deed", updatedDbDeed); 
-		return "deedView"; 
+		model.addAttribute("deed", updatedDbDeed);
+		return "deedView";
 	}
-	
+
 	@RequestMapping(path = "runDeedDestroy.do")
 	public String requestDeedDestroy(int deedId, Model m) {
 		boolean destroyed = deedDao.destroyDeed(deedId);
