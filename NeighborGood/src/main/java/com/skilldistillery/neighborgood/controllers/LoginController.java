@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.skilldistillery.neighborgood.data.ContactDAOImpl;
 import com.skilldistillery.neighborgood.data.DeedDAOImpl;
 import com.skilldistillery.neighborgood.data.UserDAOImpl;
+import com.skilldistillery.neighborgood.entities.Contact;
 import com.skilldistillery.neighborgood.entities.Deed;
 import com.skilldistillery.neighborgood.entities.User;
 
@@ -28,7 +29,7 @@ public class LoginController {
 	@Lazy
 	@Autowired
 	private ContactDAOImpl contactDao;
-	
+
 	@Lazy
 	@Autowired
 	private DeedDAOImpl deedDao;
@@ -43,11 +44,6 @@ public class LoginController {
 		return "login";
 	}
 
-//	POST login.do attempts to log in the user by retrieving it from the DAO. 
-//	If the userName and password match the DAO data, load the User object into session,
-//	and redirect to the account page, account.do. 
-//	If the login fails, display the login view.
-
 	@RequestMapping(path = "login.do", method = RequestMethod.POST)
 	public String login(User user, HttpSession session, Model model) {
 		if (session.getAttribute("loggedInUser") != null) {
@@ -59,12 +55,11 @@ public class LoginController {
 				model.addAttribute("deactivated", true);
 				return "accountDeactivated";
 			} else {
-				List<Deed> deeds = deedDao.findDeedsByProviderId(user.getId());
-				List<Deed> deedsR = deedDao.findDeedsByRecipientId(user.getId());
+
 				session.setAttribute("loggedInUser", user);
 				session.setAttribute("loggedInUserId", user.getId());
-				session.setAttribute("loggedInUserContact", contactDao.findById(user.getId()));
 				session.setAttribute("loginTime", LocalDateTime.now());
+
 				return "redirect:accountRedirect.do";
 			}
 		} else {
@@ -74,11 +69,13 @@ public class LoginController {
 
 	@RequestMapping(path = "accountRedirect.do")
 	public String redirectAccount(HttpSession session, Model m) {
-		Integer id = (Integer)session.getAttribute("loggedInUserId");
-		List<Deed> deeds = deedDao.findDeedsByProviderId(id); 
-		List<Deed> deedsR = deedDao.findDeedsByRecipientId(id); 
-		m.addAttribute("deeds", deeds); 
-		m.addAttribute("deedsR", deedsR); 
+		Integer id = (Integer) session.getAttribute("loggedInUserId");
+		Contact contact = contactDao.findContactByUserId(id); 
+		List<Deed> deeds = deedDao.findDeedsByProviderId(id);
+		List<Deed> deedsR = deedDao.findDeedsByRecipientId(id);
+		m.addAttribute("contact", contact); 
+		m.addAttribute("deeds", deeds);
+		m.addAttribute("deedsR", deedsR);
 		return "account";
 	}
 

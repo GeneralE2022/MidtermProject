@@ -37,13 +37,13 @@ public class UserDAOImpl implements UserDAO {
 	@Override
 	public User updateUser(int id, User user) {
 		User dbUser = em.find(User.class, id);
-		System.out.println(dbUser);
 
 		if (dbUser != null) {
 			dbUser.setFirstName(user.getFirstName());
 			dbUser.setLastName(user.getLastName());
 			dbUser.setUsername(user.getUsername());
 			dbUser.setPassword(user.getPassword());
+			em.flush();
 		}
 		return dbUser;
 	}

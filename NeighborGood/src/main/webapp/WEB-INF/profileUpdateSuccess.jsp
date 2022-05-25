@@ -14,27 +14,22 @@
 
 		<%@ include file="nav.jsp"%>
 
-
 		<div class="container">
 			<div class="row">
 				<div class="col"></div>
 				<div class="col-6">
 					<h1>Profile update successful</h1>
 
-					Profile <br> ${updateUser.firstName} <br>
-					${updateUser.lastName} <br> Contact <br>
 					<h3>
-						${updateContact.street}<br> ${updateContact.city}<br>
-						${updateContact.state}<br> ${updateContact.zipCode}<br>
-						${updateContact.phone}<br> ${updateContact.phone2}<br>
-						${updateContact.email}<br>
-						</h3>
+					<a href="accountRedirect.do">View your Profile</a>
+					</h3>
+
 				</div>
-				<div class="col"></div>
 			</div>
-
-
-
 		</div>
+
+
+
+	</div>
 </body>
 </html>

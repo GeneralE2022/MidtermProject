@@ -60,12 +60,16 @@ public class UserController {
 	public String updateUser(Integer existingId, User user, Contact contact, HttpSession session, Model m) {
 		
 		User updateUser = userDao.updateUser(existingId, user); 
-		Contact updateContact = contactDao.updateContact(updateUser.getId(), contact); 
+		Contact updateContact = contactDao.updateContact(updateUser.getContact().getId(), contact); 
 
 		m.addAttribute("updateUser", updateUser); 
-		System.out.println(updateUser);
 		m.addAttribute("updateContact", updateContact); 
-//		System.out.println(updateContact.toString());
+		session.setAttribute("loggedInUser", userDao.findUserById(existingId));
+		return "redirect:profileUpdateSuccess.do";
+	}
+	
+	@RequestMapping(path ="profileUpdateSuccess.do")
+	public String updateProfileRedirect() {
 		
 		return "profileUpdateSuccess";
 	}
@@ -73,8 +77,11 @@ public class UserController {
 	@RequestMapping(path = "account.do")
 	public String goToAccount(Model model, HttpSession session) {
 		Integer id = (Integer) session.getAttribute("loggedInUserId"); 
+		Contact contact = contactDao.findContactByUserId(id); 
 		List<Deed> deeds = deedDao.findDeedsByProviderId(id); 
-		List<Deed> deedsR = deedDao.findDeedsByRecipientId(id); 
+		List<Deed> deedsR = deedDao.findDeedsByRecipientId(id);
+		
+		model.addAttribute("contact", contact); 
 		model.addAttribute("deeds", deeds); 
 		model.addAttribute("deedsR", deedsR); 
 		return "account";

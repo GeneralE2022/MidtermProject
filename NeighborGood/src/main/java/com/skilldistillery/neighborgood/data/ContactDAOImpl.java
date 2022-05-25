@@ -35,6 +35,7 @@ public class ContactDAOImpl implements ContactDAO {
 			dbContact.setPhone2(contact.getPhone2());
 			dbContact.setEmail(contact.getEmail());
 			dbContact.setZipCode(contact.getZipCode());
+			em.flush();
 		}
 
 		return dbContact;

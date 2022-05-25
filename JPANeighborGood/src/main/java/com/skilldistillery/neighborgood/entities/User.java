@@ -5,6 +5,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 
 @Entity
 public class User {
@@ -26,7 +28,10 @@ public class User {
 	
 	@Column(name="last_name")
 	private String lastName;
-
+	
+	@OneToOne(mappedBy = "user")
+	private Contact contact; 
+	
 	public User() {
 	}
 
@@ -86,10 +91,18 @@ public class User {
 		this.lastName = lastName;
 	}
 
+	public Contact getContact() {
+		return contact;
+	}
+
+	public void setContact(Contact contact) {
+		this.contact = contact;
+	}
+
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", username=" + username + ", password=" + password + ", active=" + active + ", role="
-				+ role + ", firstName=" + firstName + ", lastName=" + lastName + "]";
+				+ role + ", firstName=" + firstName + ", lastName=" + lastName + ", contact=" + contact + "]";
 	}
 
 }
