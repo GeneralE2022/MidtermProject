@@ -22,6 +22,9 @@
 						<ul>
 							<li>${deed.description}</li>
 							<li>Deed offered by: ${deed.provider.username}</li>
+							<li>Claim status: 
+								<c:if test="${empty deedTransaction.recipient}"><strong>unclaimed</strong></c:if>
+								<c:if test="${not empty deedTransaction.recipient}">claimed by <strong>${deedTransaction.recipient.username}</strong></c:if></li>
 							<li>Subcategory: ${deed.subcategory.title}</li>
 						</ul>
 						<c:if test="${sessionScope.loggedInUser.id == deed.provider.id}">
