@@ -1,0 +1,17 @@
+package com.skilldistillery.neighborgood;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+@SpringBootApplication
+public class NeighborGoodApplication extends SpringBootServletInitializer {
+	  @Override
+	  protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
+	    return application.sources(MyBootApplication.class);
+	  }
+
+	public static void main(String[] args) {
+		SpringApplication.run(NeighborGoodApplication.class, args);
+	}
+
+}

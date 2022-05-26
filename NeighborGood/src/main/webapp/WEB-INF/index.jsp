@@ -21,7 +21,7 @@
 			</div>
 			
 			<div class="col">
-				<a href="home.do"> <img src="../img/logo1.png" alt="logo" width="525"></a>
+				<a href="home.do"> <img src="img/logo1.png" alt="logo" width="525"></a>
 			</div>
 
 
