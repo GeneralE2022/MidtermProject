@@ -1,5 +1,7 @@
 package com.skilldistillery.neighborgood.data;
 
+import java.time.LocalDate;
+
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
@@ -67,4 +69,15 @@ public class DeedTransactionDAOImpl implements DeedTransactionDAO {
 		return null;
 	}
 
+	@Override
+	public DeedTransaction markDeedAsCompleted(int id) {
+		System.out.println(id);
+		DeedTransaction dt = em.find(DeedTransaction.class, id);
+		System.out.println(dt);
+		if (dt != null) {
+			dt.setProvidedDate(LocalDate.now());
+			em.flush();
+		}
+		return dt;
+	}
 }

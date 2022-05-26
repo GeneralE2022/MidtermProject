@@ -11,5 +11,5 @@ public interface DeedTransactionDAO {
 	public DeedTransaction findDeedTransactionByDeedId(int id);
 	public boolean destroyDeedTransaction(int id);
 	public DeedTransaction claimDeed(Deed deedToClaim, User recipient);
-
+	public DeedTransaction markDeedAsCompleted(int id); 
 }

@@ -7,6 +7,7 @@ import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.skilldistillery.neighborgood.data.DeedDAO;
 import com.skilldistillery.neighborgood.data.DeedTransactionDAO;
@@ -35,10 +36,15 @@ public class DeedTransactionController {
 		m.addAttribute("deed", beingClaimed);
 		m.addAttribute("deedTransaction", updated);
 		
-		
 		return "redirect:deedViewRe.do"; //TODO fix to JSP
 	}
 	
-	
-
+	@RequestMapping(path = "deedComplete.do")
+	public String deedComplete(@RequestParam(name = "dtid1") int dtid, Model m) {
+		DeedTransaction dt = dtDao.markDeedAsCompleted(dtid); 
+		Deed deed = deedDao.findDeedById(dt.getDeedId()); 
+		m.addAttribute("deedTransaction", dt); 
+		m.addAttribute("deed", deed); 
+		return "deedView"; 
+	}
 }

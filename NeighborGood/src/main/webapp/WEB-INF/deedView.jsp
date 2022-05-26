@@ -34,18 +34,23 @@
 							<li>Contact: <c:if test="${deed.provider.active == 1 }">${deed.provider.contact.phone}</c:if><c:if test="${deed.provider.active == 0 }">
 								(Provider currently not offering services.)</c:if></li>
 								</c:if>
-								
-												
-
+							
+							<c:if test="${empty deedTransaction.providedDate }">
+								<li><a href="deedComplete.do?dtid1=${deedTransaction.id }">Mark a deed as completed</a></li>
+							</c:if>
+							
+							<c:if test="${not empty deedTransaction.providedDate }">
+								<li><h3>Completed on: ${deedTransaction.providedDate}</h3></li>
+							</c:if>
+							
 						</ul>
 											
 						
 						<c:if test="${sessionScope.loggedInUser.id == deed.provider.id}">
-							<a href="requestDeedUpdate.do?deedId=${deed.id}">Modify this
-								deed posting</a>
-							<a href="runDeedDestroy.do?deedId=${deed.id}">Delete this
-								deed posting</a>
+							<a href="requestDeedUpdate.do?deedId=${deed.id}">Modify this deed posting</a>
+							<a href="runDeedDestroy.do?deedId=${deed.id}">Delete this deed posting</a>
 						</c:if>
+						
 					</div>
 				</c:when>
 				<c:otherwise>
