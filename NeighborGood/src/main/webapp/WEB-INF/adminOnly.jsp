@@ -31,9 +31,21 @@
 					</ul>
 				</c:forEach>
 	
+
+		<h1>All Deeds</h1>
+				<div="row">
+				<c:forEach var="deed" items="${deeds}">
+				<div="col">
+				${deed.title}
+				
+				</div>
+				<div="col">
+				<a href="runDeedDestroy.do?deedId=${deed.id}">Delete Deed</a><br>
+				</div>
+				
 	
-	
-	
+				</c:forEach>	
+				</div>
 	
 	
 	

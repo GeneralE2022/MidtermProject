@@ -15,13 +15,13 @@
 <div>
 	
 	<form action="createDeed.do" method="POST">
-	<label for="title"> <strong>Title:</strong></label> <br>
-		<input type="text" name="title" size="25" /> <br> 
-	<label for="description"> <strong>Description:</strong></label> <br>
-		<input type="text" name="description" size="25" /> <br> 
+	<label for="title"> <strong>*Title:</strong></label> <br>
+		<input type="text" required name="title" size="25" /> <br> 
+	<label for="description"> <strong>*Description:</strong></label> <br>
+		<input type="text" required name="description" size="25" /> <br> 
 	<!-- <label for="provider"> <strong>Provider:</strong></label> <br> -->
 		<input type="hidden" name="provider" size="3" value="${sessionScope.loggedInUser.id}" readonly/> <br> 
-	<label for="subcategory"> <strong>Subcategory:</strong></label> <br>
+	<label for="subcategory"> <strong>*Subcategory:</strong></label> <br>
 		<select name="subcategory" id="subcategory-dropdown">
 			
 			<option disabled selected>Choose subcategory</option>

@@ -30,8 +30,8 @@
 				<c:when test="${empty sessionScope.loggedInUser }">
 					<div align=right>
 						<form action="login.do" method="POST">
-							<input type="text" name="username" placeholder="User name">
-							<br> <input type="password" name="password"
+							<input type="text" required name="username" placeholder="User name">
+							<br> <input type="password" required name="password" 
 								placeholder="Password" /> <br> <input type="submit"
 								value="Log In">
 						</form>

@@ -44,15 +44,11 @@ public class UserController {
 		List<Subcategory> subcategories = subcategoryDao.findAllSubcategories();
 		model.addAttribute("subcategories", subcategories);
 
-//		List<Deed> plumbingDeeds = (deedDao.findDeedsBySubcategoryId(11));
-//		model.addAttribute("plumbingDeeds", plumbingDeeds);
-//		System.out.println(plumbingDeeds.toString());
-
 		List<Deed> deeds = deedDao.findAllDeeds();
 		model.addAttribute("deeds", deeds);
 
 		return "index";
-	}
+	}	
 
 	@RequestMapping(path = "registration.do")
 	public String createNewUser(User user, Contact contact, Model model) {
@@ -129,7 +125,8 @@ public class UserController {
 
 		if (user.getRole().equals("admin")) {
 			List<User> users = userDao.findAllUsers();
-			System.out.println(users != null);
+			List<Deed> deeds = deedDao.findAllDeeds();
+			m.addAttribute("deeds", deeds);
 			m.addAttribute("adminUser", user);
 			m.addAttribute("users", users);
 			return "adminOnly";
@@ -137,7 +134,7 @@ public class UserController {
 			return "index";
 		}
 	}
-	
+		
 	@RequestMapping(path = "deactivateUser.do")
 	public String deactivateUser(int uid, Model m) {
 		boolean deactivated = false;
