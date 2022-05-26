@@ -16,6 +16,9 @@
 
 	<%@ include file="nav.jsp"%>
 <a href="requestCreateDeed.do">Create new deed</a>
+
+	<c:if test="${loggedInUser.role == 'admin'}"><a href="adminOnly.do">View Admin Panel</a></c:if>
+
 	<c:choose>
 		<c:when test="${not empty sessionScope.loggedInUser }">
 			<form action="updateProfile.do" method="POST">

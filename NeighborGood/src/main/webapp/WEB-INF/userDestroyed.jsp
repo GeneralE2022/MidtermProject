@@ -6,15 +6,15 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Account Deactivated</title>
+<title>Account Destroyed</title>
 	<%@ include file="nav.jsp"%>
 </head>
 <body>
 	<br>
 	
-	<c:if test="${deactivated}">
+	<c:if test="${destroyed}">
 
-	<h1>Account Deactivated</h1>
+	<h1>Account Destroyed Forever</h1>
 	
 	</c:if>
 </body>

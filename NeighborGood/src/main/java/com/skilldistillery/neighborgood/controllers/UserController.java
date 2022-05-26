@@ -40,14 +40,14 @@ public class UserController {
 
 	@RequestMapping(path = { "/", "home.do" })
 	public String home(Model model) {
-		
+
 		List<Subcategory> subcategories = subcategoryDao.findAllSubcategories();
 		model.addAttribute("subcategories", subcategories);
-		
+
 //		List<Deed> plumbingDeeds = (deedDao.findDeedsBySubcategoryId(11));
 //		model.addAttribute("plumbingDeeds", plumbingDeeds);
 //		System.out.println(plumbingDeeds.toString());
-		
+
 		List<Deed> deeds = deedDao.findAllDeeds();
 		model.addAttribute("deeds", deeds);
 
@@ -120,6 +120,45 @@ public class UserController {
 	@RequestMapping(path = "accountDeactivated.do")
 	public String deactivateRedirect() {
 		return "accountDeactivated";
+	}
+
+	@RequestMapping(path = "adminOnly.do")
+	public String adminOnly(HttpSession session, Model m) {
+		User user = (User) session.getAttribute("loggedInUser");
+		System.out.println(user);
+
+		if (user.getRole().equals("admin")) {
+			List<User> users = userDao.findAllUsers();
+			System.out.println(users != null);
+			m.addAttribute("adminUser", user);
+			m.addAttribute("users", users);
+			return "adminOnly";
+		} else {
+			return "index";
+		}
+	}
+	
+	@RequestMapping(path = "deactivateUser.do")
+	public String deactivateUser(int uid, Model m) {
+		boolean deactivated = false;
+		deactivated = userDao.deactivateUser(uid);
+		m.addAttribute("deactivated", deactivated);
+		return "accountDeactivated";
+	}
+	
+	@RequestMapping(path = "reactivateUser.do")
+	public String reactivateUser(int uid, Model m) {
+		boolean reactivated = false;
+		reactivated = userDao.reactivateUser(uid);
+		m.addAttribute("reactivated", reactivated);
+		return "accountReactivated";
+	}
+	
+	@RequestMapping(path = "destroyUser.do")
+	public String destroyUser(int uid, Model m) {
+		boolean destroyed = userDao.destroyUser(uid);
+		m.addAttribute("destroyed", destroyed);
+		return "userDestroyed";
 	}
 
 }

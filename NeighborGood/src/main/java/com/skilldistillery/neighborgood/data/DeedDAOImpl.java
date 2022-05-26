@@ -74,7 +74,7 @@ public class DeedDAOImpl implements DeedDAO {
 
 	@Override
 	public List<Deed> findAllDeeds() {
-		String jpql = "SELECT d FROM Deed d";
+		String jpql = "SELECT d FROM Deed d ORDER BY d.subcategory ASC";
 		List<Deed> deeds;
 		deeds = em.createQuery(jpql, Deed.class).getResultList();
 		return deeds;

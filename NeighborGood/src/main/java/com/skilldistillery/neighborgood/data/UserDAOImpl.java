@@ -1,6 +1,8 @@
 package com.skilldistillery.neighborgood.data;
 
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -12,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
+import com.skilldistillery.neighborgood.entities.Contact;
 import com.skilldistillery.neighborgood.entities.User;
 
 @Transactional
@@ -78,9 +81,44 @@ public class UserDAOImpl implements UserDAO {
 	public boolean deactivateUser(int id) {
 		User user = userDao.findUserById(id);
 		user.setActive(0);
-		boolean deactivated = user.getActive()==0;
-		
+		boolean deactivated = user.getActive() == 0;
+
 		return deactivated;
+	}
+
+	@Override
+	public List<User> findAllUsers() {
+		List<User> users = new ArrayList<>();
+		String jpql = "SELECT u FROM User u";
+		users = em.createQuery(jpql, User.class).getResultList();
+		System.out.println(users != null);
+		return users;
+	}
+
+	@Override
+	public boolean reactivateUser(int uid) {
+		User user = userDao.findUserById(uid);
+		user.setActive(1);
+		boolean reactivated = user.getActive() == 1;
+
+		return reactivated;
+	}
+
+	@Override
+	public boolean destroyUser(int id) {
+		boolean destroyed = false;
+		User userToDestroy = em.find(User.class, id);
+		Contact contactToDestroy = em.find(Contact.class, userToDestroy.getContact().getId());
+		if (userToDestroy != null) {
+			em.remove(contactToDestroy);
+			
+			if (!em.contains(contactToDestroy)) {
+				em.remove(userToDestroy);
+				destroyed = !em.contains(userToDestroy);
+			}
+		}
+
+		return destroyed;
 	}
 
 }
