@@ -12,7 +12,8 @@
 <body>
 
 	<%@ include file="nav.jsp"%>
-<div>
+
+<div class="container-lg">
 	
 	<form action="createDeed.do" method="POST">
 	<label for="title"> <strong>*Title:</strong></label> <br>
@@ -46,10 +47,8 @@
 		</select>
 	
 	<input type="submit" value="Post New Deed!" />
-	
+	</form>
 		</div>
-		
-
 
 </body>
 </html>

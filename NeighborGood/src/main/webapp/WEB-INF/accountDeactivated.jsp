@@ -10,6 +10,7 @@
 	<%@ include file="nav.jsp"%>
 </head>
 <body>
+<div class="container-lg">
 	<br>
 	
 	<c:if test="${deactivated}">
@@ -17,5 +18,8 @@
 	<h1>Account Deactivated</h1>
 	
 	</c:if>
+	
+	
+	</div>
 </body>
 </html>

@@ -2,11 +2,10 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
-<nav class="navbar sticky-top bg-white">
+<nav class="navbar navbar-expand-lg navbar-light bg-white">
 
-	<div class="d-flex justify-content-start">
+	<div class="container" mx-auto>
 		<a href="home.do" class="btn btn-primary">Welcome</a>
-	</div>
 	
 	<c:choose>
 		<c:when test="${not empty sessionScope.loggedInUser }">
@@ -17,5 +16,6 @@
 		</c:when>
 	</c:choose>
 
+	</div>
 
 </nav>

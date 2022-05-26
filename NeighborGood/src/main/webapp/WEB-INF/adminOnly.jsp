@@ -13,7 +13,6 @@
 
 <div class="container-lg">
 
-
 	<%@ include file="nav.jsp"%>
 	<c:if test="${not adminUser.role == 'admin' }">
 		<h1>You are not authorized to view this page</h1>
@@ -33,33 +32,30 @@
 	
 
 		<h1>All Deeds</h1>
-				<div="row">
-				<c:forEach var="deed" items="${deeds}">
-				<div="col">
-				${deed.title}
-				
+		<div class = "container">
+				<c:forEach var = "deed" items="${deeds}">
+				<div class = "row">
+					<div class = "col">
+						${deed.title}
+					</div>
+				<div class = "col">
+					<a href="runDeedDestroy.do?deedId=${deed.id}">Delete Deed</a>
 				</div>
-				<div="col">
-				<a href="runDeedDestroy.do?deedId=${deed.id}">Delete Deed</a><br>
-				</div>
-				
 	
+</div> 
 				</c:forEach>	
 				</div>
-	
-	
-	
-	
-	
-	
-	
 	</c:if>
+				</div>
 	
-
-		
 	
-
-
-</div> 
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
 </body>
 </html>

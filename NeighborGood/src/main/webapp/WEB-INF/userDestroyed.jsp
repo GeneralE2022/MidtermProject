@@ -10,6 +10,8 @@
 	<%@ include file="nav.jsp"%>
 </head>
 <body>
+
+<div class="container-lg">
 	<br>
 	
 	<c:if test="${destroyed}">
@@ -17,5 +19,6 @@
 	<h1>Account Destroyed Forever</h1>
 	
 	</c:if>
+	</div>
 </body>
 </html>

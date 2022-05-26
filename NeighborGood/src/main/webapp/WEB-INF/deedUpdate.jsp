@@ -10,6 +10,8 @@
 
 </head>
 <body>
+
+<div class="container-lg">
 	<%@ include file="nav.jsp"%>
 	<div>
 		<form action="runDeedUpdate.do?deedId=${deedBeingUpdated.id}" method="POST">
@@ -45,7 +47,8 @@
 		</select>
 	
 	<input type="submit" value="Save Changes" />
-		
+	</form>
+	</div>
 	</div>
 </body>
 </html>
