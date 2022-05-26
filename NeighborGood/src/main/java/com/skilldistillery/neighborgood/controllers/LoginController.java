@@ -14,9 +14,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.skilldistillery.neighborgood.data.ContactDAOImpl;
 import com.skilldistillery.neighborgood.data.DeedDAOImpl;
+import com.skilldistillery.neighborgood.data.SubcategoryDAO;
 import com.skilldistillery.neighborgood.data.UserDAOImpl;
 import com.skilldistillery.neighborgood.entities.Contact;
 import com.skilldistillery.neighborgood.entities.Deed;
+import com.skilldistillery.neighborgood.entities.Subcategory;
 import com.skilldistillery.neighborgood.entities.User;
 
 @Controller
@@ -33,6 +35,10 @@ public class LoginController {
 	@Lazy
 	@Autowired
 	private DeedDAOImpl deedDao;
+	
+	@Lazy
+	@Autowired
+	private SubcategoryDAO subcategoryDao;
 
 //	GET/POST login.do - If a user is logged in and requests login.do, they should be redirected to index.do.
 //	GET login.do displays the login view.
@@ -81,8 +87,14 @@ public class LoginController {
 
 //	logout.do removes the user from session and redirects to index.do.
 	@RequestMapping(path = "logout.do")
-	public String logout(HttpSession session) {
+	public String logout(HttpSession session, Model model) {
 		session.removeAttribute("loggedInUser");
+		List<Subcategory> subcategories = subcategoryDao.findAllSubcategories();
+		model.addAttribute("subcategories", subcategories);
+
+		List<Deed> deeds = deedDao.findAllDeeds();
+		model.addAttribute("deeds", deeds);
+
 		return "index";
 	}
 

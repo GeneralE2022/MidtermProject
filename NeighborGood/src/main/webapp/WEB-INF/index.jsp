@@ -21,10 +21,10 @@
 		  	<div class="col">
 			</div>
 			
-			<div class="col">
-				<a href="home.do"> <img src="img/logo1.png" alt="logo" width="525"></a>
-			</div>
 
+			<div class="col" align=right>
+				<a href="home.do"> <img src="img/logo-current-trans.gif" alt="logo" width="525"></a>
+			</div>
 
 		<div class="col">
 			<c:choose>
