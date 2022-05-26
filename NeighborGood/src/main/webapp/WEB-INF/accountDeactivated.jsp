@@ -8,6 +8,7 @@
 <meta charset="UTF-8">
 <title>Account Deactivated</title>
 	<%@ include file="nav.jsp"%>
+	<link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
 <div class="container-lg">

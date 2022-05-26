@@ -4,22 +4,28 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link rel="stylesheet" href="styles.css">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <jsp:include page="bootstrapHead.jsp" />
 <title>Deed Test</title>
-
+<link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
 	<div class="container-lg">
 		<%@ include file="nav.jsp"%>
 		<br>
-		<div>
-			<c:choose>
+		
+		<div class="container">
+  			<div class="row">
+   			 <div class="col-sm">
+     
+   			 </div>
+    <div class="col-sm">
+      <c:choose>
 				<c:when test="${not empty deed}">
 					<div align="left">
-						<h5>Deed Subcategory: ${deed.subcategory.title}</h5>
-						<h6>Deed Title: ${deed.title}</h6>
-						<h6>Deed ID: ${deed.id}</h6>
+						<h5 align="center">Deed Title: ${deed.title}</h5>
+						<h6 align="center">Deed Subcategory: ${deed.subcategory.title}</h6>
 
 						<ul>
 							<li>Description: ${deed.description}</li>
@@ -40,7 +46,7 @@
 							</c:if>
 							
 							<c:if test="${not empty deedTransaction.providedDate }">
-								<li><h3>Completed on: ${deedTransaction.providedDate}</h3></li>
+								<li>Completed on: ${deedTransaction.providedDate}</li>
 							</c:if>
 							
 						</ul>
@@ -57,8 +63,16 @@
 			No deed to display :(
 			</c:otherwise>
 			</c:choose>
+    </div>
+    <div class="col-sm">
+      
+    </div>
+  </div>
+</div>
+		
+		
+			
 
 		</div>
-	</div>
 </body>
 </html>

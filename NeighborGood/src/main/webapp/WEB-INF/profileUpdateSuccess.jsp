@@ -7,6 +7,7 @@
 <meta charset="UTF-8">
 <jsp:include page="bootstrapHead.jsp" />
 <title>Profile update successful</title>
+<link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
 

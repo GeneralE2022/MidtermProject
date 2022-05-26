@@ -7,7 +7,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <jsp:include page="bootstrapHead.jsp" />
 <title>Deed Test</title>
-
+<link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
 

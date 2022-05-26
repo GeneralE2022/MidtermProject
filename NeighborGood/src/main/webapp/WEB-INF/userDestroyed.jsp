@@ -8,6 +8,7 @@
 <meta charset="UTF-8">
 <title>Account Destroyed</title>
 	<%@ include file="nav.jsp"%>
+	<link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
 

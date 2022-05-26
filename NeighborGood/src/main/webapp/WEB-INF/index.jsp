@@ -5,9 +5,10 @@
 <html>
 <head>
 
-<link href="styles.css" rel="stylesheet">
+
 <jsp:include page="bootstrapHead.jsp" />
 <title>Landing Page</title>
+<link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
 
