@@ -5,12 +5,12 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-#f9bd54">
 
 	<div class="container" mx-auto>
-		<a href="home.do" class="btn btn-primary">Welcome</a>
 	
+		<a href="home.do" class="btn btn-secondary btn-lg">Welcome</a>
 	<c:choose>
 		<c:when test="${not empty sessionScope.loggedInUser }">
-			<a href="account.do" class="btn btn-success">Account</a>
-			<a href="logout.do" class="btn btn-primary">Log Out</a>
+			<a href="account.do" class="btn btn-secondary btn-lg">Account</a>
+			<a href="logout.do" class="btn btn-secondary btn-lg">Log Out</a>
 
 
 		</c:when>

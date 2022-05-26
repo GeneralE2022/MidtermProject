@@ -15,9 +15,9 @@
 
 
 	<%@ include file="nav.jsp"%>
-<a href="requestCreateDeed.do">Create new deed</a>
 
-	<c:if test="${loggedInUser.role == 'admin'}"><a href="adminOnly.do">View Admin Panel</a></c:if>
+
+
 	
 	<c:choose>
 		<c:when test="${not empty sessionScope.loggedInUser }">
@@ -172,11 +172,14 @@
 
 					</div>
 				</div>
-
 			</div>
-			
+	<c:if test="${loggedInUser.role == 'admin'}"><a href="adminOnly.do" class="btn btn-secondary btn-lg">View Admin Panel</a></c:if>
+			<br><br>
 			<div><!-- List of user's deeds -->
+			<a href="requestCreateDeed.do" class="btn btn-secondary btn-lg">Create new deed</a>
+			<br><br>
 			<h2>Your Deeds</h2>
+				
 			<c:forEach var="deed" items="${deeds}">
 					<div class="row">
 						<h4>
