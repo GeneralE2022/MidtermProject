@@ -45,5 +45,11 @@ class UserTest {
 		assertNotNull(user);
 		assertEquals("admin", user.getUsername());
 	}
+	
+	@Test
+	void test_contact_mapping() {
+		assertNotNull(user);
+		assertEquals("admin@neighborgood.com", user.getContact().getEmail());
+	}
 
 }

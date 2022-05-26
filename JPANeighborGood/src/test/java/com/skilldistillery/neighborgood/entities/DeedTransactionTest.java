@@ -55,7 +55,7 @@ class DeedTransactionTest {
 	@Test
 	void test_deed_mappings() {
 		assertNotNull(dt);
-		assertEquals(10, dt.getDeedId().getId());
+		assertEquals(10, dt.getDeedId());
 	}
 	
 	@Test
