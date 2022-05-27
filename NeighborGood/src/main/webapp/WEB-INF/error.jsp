@@ -14,7 +14,7 @@
 
 
 
-<a href="/">Go Home</a>
+<a href="home.do">Go Home</a>
 
 		
 	</div>
