@@ -12,8 +12,8 @@
 <body>
 
 <div class="container-lg">
-
 	<%@ include file="nav.jsp"%>
+
 	<c:if test="${not adminUser.role == 'admin' }">
 		<h1>You are not authorized to view this page</h1>
 	</c:if>
@@ -25,7 +25,7 @@
 						<ul><strong>Status:</strong> 
 								<c:if test="${user.active == 0 }"><li>Inactive || <a href="reactivateUser.do?uid=${user.id}">Reactivate this user</a></li></c:if>
 								<c:if test="${user.active == 1 }"><li>Active || <a href="deactivateUser.do?uid=${user.id}">Deactivate this user</a></li></c:if>
-								<li><a href="destroyUser.do?uid=${user.id}">Destroy this user forever</a></li>
+								<%-- <li><a href="destroyUser.do?uid=${user.id}">Destroy this user forever</a></li> --%>
 						</ul> 
 					</ul>
 				</c:forEach>

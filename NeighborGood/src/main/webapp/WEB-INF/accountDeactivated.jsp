@@ -7,16 +7,18 @@
 <head>
 <meta charset="UTF-8">
 <title>Account Deactivated</title>
-	<%@ include file="nav.jsp"%>
 	<link rel="stylesheet" href="css/styles.css">
+	<jsp:include page="bootstrapHead.jsp" />
 </head>
 <body>
 <div class="container-lg">
+	<%@ include file="nav.jsp"%>
 	<br>
 	
 	<c:if test="${deactivated}">
 
-	<h1>Account Deactivated</h1>
+	<h1 align="center">Account Deactivated</h1>
+	<a href="adminOnly.do"><h2 align="center">Back to Admin Panel</h2></a>
 	
 	</c:if>
 	
