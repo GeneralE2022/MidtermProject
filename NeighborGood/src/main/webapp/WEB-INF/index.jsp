@@ -4,7 +4,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 
 <jsp:include page="bootstrapHead.jsp" />
 <title>Landing Page</title>
@@ -18,22 +19,23 @@
 		<br>
 
 		  	<div class="row row-cols-3">
-		  	<div class="col">
+		  	<div class="col-3">
 			</div>
 			
-
-			<div class="col" align=right>
-				<a href="home.do"> <img src="img/logo-current-trans.gif" alt="logo" width="525"></a>
+			<div class="col-6">
+				<img src="img/logo-current-trans.gif" alt="logo" width="475" class="logo">
 			</div>
 
-		<div class="col">
+		<div class="col-3">
+		<br>
+		<br>
 			<c:choose>
 				<c:when test="${empty sessionScope.loggedInUser }">
 					<div align=right>
 						<form action="login.do" method="POST">
-							<input type="text" required name="username" placeholder="User name">
+							<input type="text" required name="username" placeholder="User name" size="60">
 							<br> <input type="password" required name="password" 
-								placeholder="Password" /> <br> <input type="submit"
+								placeholder="Password" size="60"/> <br> <input type="submit"
 								value="Log In">
 						</form>
 						<br> <a href="registration.do">Create account</a>
@@ -193,6 +195,15 @@
 				
 			</div>
 		</div>
+		
+		<br>
+		<br>
+		<br>
+		<br>
+		
+<!-- Optional: Bootstrap Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+		
 </body>
 <footer>
 	<p style="text-align: center;">All Rights Reserved Dismal Justice
