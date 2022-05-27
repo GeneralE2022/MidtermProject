@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.skilldistillery.neighborgood.data.DeedDAO;
 import com.skilldistillery.neighborgood.data.DeedTransactionDAO;
+import com.skilldistillery.neighborgood.data.UserDAO;
 import com.skilldistillery.neighborgood.entities.Deed;
 import com.skilldistillery.neighborgood.entities.DeedTransaction;
 import com.skilldistillery.neighborgood.entities.User;
@@ -26,6 +27,10 @@ public class DeedTransactionController {
 	@Autowired
 	private DeedDAO deedDao;
 	
+	@Lazy
+	@Autowired
+	private UserDAO userDao;
+	
 	@RequestMapping(path = "claimDeed.do")
 	public String claimDeed(Integer deedId, HttpSession session, Model m) {
 		DeedTransaction updated = new DeedTransaction();
@@ -33,10 +38,12 @@ public class DeedTransactionController {
 		Deed beingClaimed = deedDao.findDeedById(deedId);
 		
 		updated = dtDao.claimDeed(beingClaimed, user);
+		System.out.println(updated.toString());
+		System.out.println(beingClaimed.toString());
 		m.addAttribute("deed", beingClaimed);
 		m.addAttribute("deedTransaction", updated);
-		
-		return "redirect:deedViewRe.do"; //TODO fix to JSP
+//		session.setAttribute("loggedInUser", userDao.findUserById(user.getId()));
+		return "deedView"; //TODO fix to JSP
 	}
 	
 	@RequestMapping(path = "deedComplete.do")

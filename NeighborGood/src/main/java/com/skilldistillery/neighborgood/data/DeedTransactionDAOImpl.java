@@ -66,7 +66,7 @@ public class DeedTransactionDAOImpl implements DeedTransactionDAO {
 	public DeedTransaction claimDeed(Deed deedToClaim, User recipient) {
 		DeedTransaction updatedDeedTransaction = em.find(DeedTransaction.class, deedToClaim.getId());
 		updatedDeedTransaction.setRecipient(recipient);
-		return null;
+		return updatedDeedTransaction;
 	}
 
 	@Override

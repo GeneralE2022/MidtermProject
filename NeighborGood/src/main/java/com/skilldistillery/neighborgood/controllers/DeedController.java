@@ -51,8 +51,9 @@ public class DeedController {
 	}
 
 	@RequestMapping(path="deedViewRe.do")
-	public String deedViewRe(Model m) {
-			
+	public String deedViewRe(Model m, HttpSession session) {
+		
+		
 		return "deedView";
 	}
 

@@ -64,6 +64,11 @@ public class UserController {
 
 		Contact newContact = contactDao.createNewContact(contact);
 		model.addAttribute("newContact", newContact);
+		List<Subcategory> subcategories = subcategoryDao.findAllSubcategories();
+		model.addAttribute("subcategories", subcategories);
+
+		List<Deed> deeds = deedDao.findAllDeeds();
+		model.addAttribute("deeds", deeds);
 		return "index";
 	}
 
